@@ -1,0 +1,28 @@
+WeatherStation TODO List
+
+
+1. Identity server
+-obsługa logiki autoryzacji i uwierzytelnienia jako oddzielny serwer.
+2.Api
+-komunikacja z identity serwer
+-pobranie danych wystawionych przez stację
+-komunikacja z zewnętrznym Api openWeatherMap do pobrania danych pogodowych zewnętrznych.
+-dane chcemy pobierać dla położenia geograficznego naszej stacji w celu porównania wyników
+-statystyka wyników: trafność z rzeczywistymi
+-pobrane dane dla 7 dni w przód np oraz pobranie co godzinę. (co godzinę powiadomienie czy założona pogoda się sprawdziła(opcja do ustalenia))
+3. Client
+-Interfejs użytkownika strzelający do Api
+-możliwość zakładania konta użytkownika
+-panel użytkownika, podajemy tutaj naszą lokalizację lub pobieramy korzystając z gps (do ustalenia)
+-powiadomienia ? alarm ? możliwość ustawienia raportów? 
+-widok wyświetlający dane ze stacji tj.: 
+*temperatura
+*prędkość wiatru
+*wilgotność
+*wschód zachód?
+?? dodatkowe czujniki ? 
+-widok przedstawiający pogodę dla naszej lokalizacji wstecz korzystając z danych zebranych przez stację
+-widok przedstawiający pogodę dla naszej lokalizacji do przodu kozystając z danych wystawionych z zewnętrznego Api
+-widok ze statystykami trafności wystawionych danych przez zewnętrzne Api
+ 
+
