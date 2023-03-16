@@ -6,30 +6,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Vetero.Application.Common.Interfaces;
+using Microsoft.Extensions.Options;
+using Vetero.Application.Common.Helpers;
 
 namespace Vetero.Infrastructure.ExternalApi.Rapid
 {
     public partial class RapidClient : IRapidClient
     {
         private string _baseUrl = "https://weatherapi-com.p.rapidapi.com";
-        private string _myApiKey = "3e6a145959msh2cf4f9b7c4fb4a8p1d71a5jsnfc4ef92cb297";
         private readonly HttpClient _httpClient;
-        private Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
-
-        public RapidClient(IHttpClientFactory factory)
+        private Lazy<JsonSerializerSettings> _settings;
+        private readonly AppSettings _appSettings;
+        public RapidClient(IHttpClientFactory factory, IOptions<AppSettings> options)
         {
             _httpClient = factory.CreateClient("RapidClient");
+
             _baseUrl = _httpClient.BaseAddress.ToString();
-            _settings = new Lazy<Newtonsoft.Json.JsonSerializerSettings>(() =>
+            _settings = new Lazy<JsonSerializerSettings>(() =>
             {
-                var settings = new Newtonsoft.Json.JsonSerializerSettings();
+                var settings = new JsonSerializerSettings();
                 UpdateJsonSerializerSettings(settings);
                 return settings;
             });
+            _appSettings = options.Value;
         }
 
 
-        protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
+        protected JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
 
         partial void UpdateJsonSerializerSettings(JsonSerializerSettings settings);
 

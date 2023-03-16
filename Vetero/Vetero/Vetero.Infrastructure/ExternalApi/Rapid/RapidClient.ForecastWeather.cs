@@ -1,21 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
-using Vetero.Application.Common.Helpers;
+using Vetero.Infrastructure.Queries;
 
 namespace Vetero.Infrastructure.ExternalApi.Rapid
 {
     public partial class RapidClient
     {
-        public async Task<string> GetRealTimeWeatherAsync(string location, CancellationToken cancellationToken)
+        public async Task<string> GetForecastWeatherAsync(ForecastQuery query, CancellationToken cancellationToken)
         {
             var urlBuilder = new StringBuilder();
-            urlBuilder.Append(!string.IsNullOrEmpty(_baseUrl) ? _baseUrl : "").Append($"current.json?q={location}");
-            
+            var days = query.Days != null ? $"days={query.Days}" : "";
+            var lang = query.Lang != null ? $"lang={query.Lang}" : "";
+            var date = query.Date != null ? $"dt={query.Date}" : "";
+
+            urlBuilder.Append(!string.IsNullOrEmpty(_baseUrl) ? _baseUrl : "").Append($"forecast.json?q={query.Location}")
+                .Append($"{days}{lang}{date}");
+
             var client = _httpClient;
             client.DefaultRequestHeaders.Add("X-RapidAPI-Key", $"{_appSettings.RapidApiKey}");
             client.DefaultRequestHeaders.Add("X-RapidAPI-Host", "weatherapi-com.p.rapidapi.com");
