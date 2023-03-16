@@ -3,7 +3,7 @@
 namespace Vetero.Server.Controllers.WeatherStation
 {
     [ApiController]
-    [Route("api/weatherstation")]
+    [Route("api/weather-station")]
     public partial class WeatherStationController : ApiControllerBase
     {
         public WeatherStationController()

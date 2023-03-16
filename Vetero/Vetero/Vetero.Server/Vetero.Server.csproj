@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="12.0.1" />
+    <PackageReference Include="log4net" Version="2.0.15" />
+    <PackageReference Include="MediatR" Version="11.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.14">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -20,6 +21,12 @@
     <ProjectReference Include="..\Vetero.Application\Vetero.Application.csproj" />
     <ProjectReference Include="..\Vetero.Infrastructure\Vetero.Infrastructure.csproj" />
     <ProjectReference Include="..\Vetero.Persistance\Vetero.Persistance.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="log4netconfig.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

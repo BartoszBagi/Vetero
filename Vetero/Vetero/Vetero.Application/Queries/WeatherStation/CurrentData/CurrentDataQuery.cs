@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Vetero.Domain.Entities.WeatherData;
 
-namespace Vetero.Application.Queries.WeatherStation
+namespace Vetero.Application.Queries.WeatherStation.CurrentData
 {
-    public class CurrentDataQuery : IRequest<WeatherStationData>
+    public class CurrentDataQuery : IRequest<WeatherStationDataVm>
     {
     }
 }

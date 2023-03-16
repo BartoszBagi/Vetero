@@ -12,6 +12,7 @@ namespace Vetero.Persistance
 {
     public static class DependencyInjection
     {
+        
         public static IServiceCollection AddPersistance(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<VeteroDbContext>(
