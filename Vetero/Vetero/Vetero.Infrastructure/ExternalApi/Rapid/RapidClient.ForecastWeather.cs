@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Vetero.Infrastructure.Queries;
+﻿using System.Text;
+using Vetero.Application.External.Queries;
 
 namespace Vetero.Infrastructure.ExternalApi.Rapid
 {

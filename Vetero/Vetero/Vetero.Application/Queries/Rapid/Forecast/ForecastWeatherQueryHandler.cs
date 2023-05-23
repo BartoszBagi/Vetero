@@ -1,11 +1,9 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Vetero.Application.Common.Interfaces;
+using Vetero.Application.External.Queries;
 using Vetero.Domain.Entities.Rapid.ForecastItems;
+
 
 namespace Vetero.Application.Queries.Rapid.Forecast
 {
@@ -17,9 +15,21 @@ namespace Vetero.Application.Queries.Rapid.Forecast
         {
             _client = client;
         }
-        public Task<ForecastWeather> Handle(ForecastWeatherQuery request, CancellationToken cancellationToken)
+        public async Task<ForecastWeather> Handle(ForecastWeatherQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var response = new ForecastWeather();
+
+            var result = await _client.GetForecastWeatherAsync( new ForecastQuery() 
+                                                 { Location = request.Location,
+                                                    Date = request.Date,
+                                                    Days = request.Days,
+                                                    Lang = request.Lang }, cancellationToken
+                                           );
+            if (result != null)
+                response = JsonConvert.DeserializeObject<ForecastWeather>(result);
+
+            return response;
+
         }
     }
 }

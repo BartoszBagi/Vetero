@@ -1,13 +1,7 @@
 ﻿using Newtonsoft.Json;
-using System.Net.Http;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Vetero.Application.Common.Interfaces;
 using Microsoft.Extensions.Options;
 using Vetero.Application.Common.Helpers;
+using Vetero.Application.Common.Interfaces;
 
 namespace Vetero.Infrastructure.ExternalApi.Rapid
 {

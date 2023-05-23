@@ -7,15 +7,12 @@ namespace Vetero.Server.Controllers.Rapid
     public partial class RapidController
     {
         [HttpGet]
-        [Route("real-time-weather/{location}/{days?}/{lang?}/{date}")]
-        public async Task<IActionResult> GetForecastWeatherAsync(string location, int? days = null, string? lang = null, DateOnly? date = null )
+        [Route("forecast-weather")]
+        public async Task<IActionResult> GetForecastWeatherAsync([FromQuery] ForecastWeatherQuery query)
         {
             try
             {
-                var result = await Mediator.Send(new ForecastWeatherQuery() { Location = location, 
-                                                                        Days = days,
-                                                                        Lang = lang,
-                                                                        Date = date });
+                var result = await Mediator.Send(query);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -24,5 +21,6 @@ namespace Vetero.Server.Controllers.Rapid
             }
 
         }
+
     }
 }

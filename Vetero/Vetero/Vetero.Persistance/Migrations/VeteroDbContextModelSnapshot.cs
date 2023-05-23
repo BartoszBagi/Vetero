@@ -34,7 +34,35 @@ namespace Vetero.Persistance.Migrations
                     b.Property<DateTime>("DataDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<double>("Humidity")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Pressure")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Sunrise")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Sunset")
+                        .HasColumnType("float");
+
                     b.Property<double>("Temperature")
+                        .HasColumnType("float");
+
+                    b.Property<double>("TotalPrecip_in")
+                        .HasColumnType("float");
+
+                    b.Property<double>("TotalPrecip_mm")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Uv")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Wind_Dir")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Wind_Kph")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
@@ -45,14 +73,32 @@ namespace Vetero.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            DataDate = new DateTime(2023, 3, 6, 21, 34, 35, 396, DateTimeKind.Local).AddTicks(3928),
-                            Temperature = 36.600000000000001
+                            DataDate = new DateTime(2023, 3, 29, 20, 38, 29, 216, DateTimeKind.Local).AddTicks(3715),
+                            Humidity = 20.0,
+                            Pressure = 34.82,
+                            Sunrise = 7.0,
+                            Sunset = 19.0,
+                            Temperature = 36.600000000000001,
+                            TotalPrecip_in = 0.0,
+                            TotalPrecip_mm = 0.0,
+                            Uv = 100.0,
+                            Wind_Dir = "East",
+                            Wind_Kph = 30.0
                         },
                         new
                         {
                             Id = 2,
-                            DataDate = new DateTime(2023, 3, 5, 0, 0, 0, 0, DateTimeKind.Local),
-                            Temperature = 38.600000000000001
+                            DataDate = new DateTime(2023, 3, 28, 0, 0, 0, 0, DateTimeKind.Local),
+                            Humidity = 22.0,
+                            Pressure = 34.82,
+                            Sunrise = 7.0099999999999998,
+                            Sunset = 19.010000000000002,
+                            Temperature = 38.600000000000001,
+                            TotalPrecip_in = 2.0,
+                            TotalPrecip_mm = 1.0,
+                            Uv = 120.0,
+                            Wind_Dir = "East",
+                            Wind_Kph = 33.0
                         });
                 });
 #pragma warning restore 612, 618

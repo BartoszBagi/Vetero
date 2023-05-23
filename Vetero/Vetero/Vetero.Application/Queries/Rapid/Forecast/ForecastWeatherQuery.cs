@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,9 +11,10 @@ namespace Vetero.Application.Queries.Rapid.Forecast
 {
     public class ForecastWeatherQuery : IRequest<ForecastWeather>
     {
+        [Required]
         public string Location { get; set; }
         public int? Days { get; set; }
         public string? Lang { get; set; } // Returns 'condition:text' field in API in the desired language
-        public DateOnly? Date { get; set; }
+        public string? Date { get; set; }
     }
 }

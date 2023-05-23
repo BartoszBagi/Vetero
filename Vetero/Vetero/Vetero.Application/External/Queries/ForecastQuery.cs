@@ -6,14 +6,14 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vetero.Infrastructure.Queries
+namespace Vetero.Application.External.Queries
 {
     public class ForecastQuery
     {
         public string Location { get; set; }
         public int? Days { get; set; }
         public string? Lang { get; set; } // Returns 'condition:text' field in API in the desired language
-        public DateOnly? Date{ get; set; }
+        public string? Date { get; set; }
 
     }
 }

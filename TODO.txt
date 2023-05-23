@@ -11,7 +11,7 @@ WeatherStation TODO List
 -statystyka wyników: trafność z rzeczywistymi
 -pobrane dane dla 7 dni w przód np oraz pobranie co godzinę. (co godzinę powiadomienie czy założona pogoda się sprawdziła(opcja do ustalenia))
 3. Client
--Interfejs użytkownika strzelający do Api
+-Interfejs użytkownika komunikujący z Api
 -możliwość zakładania konta użytkownika
 -panel użytkownika, podajemy tutaj naszą lokalizację lub pobieramy korzystając z gps (do ustalenia)
 -powiadomienia ? alarm ? możliwość ustawienia raportów? 

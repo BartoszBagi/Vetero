@@ -19,7 +19,7 @@ namespace Vetero.Domain.Entities.Rapid.ForecastItems
         public double maxwind_kph { get; set; }
         public double totalprecip_mm { get; set; }
         public double totalprecip_in { get; set; }
-        public int totalsnow_cm { get; set; }
+        public double totalsnow_cm { get; set; }
         public double avgvis_km { get; set; }
         public double avgvis_miles { get; set; }
         public double avghumidity { get; set; }
