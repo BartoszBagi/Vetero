@@ -1,16 +1,8 @@
-﻿using log4net.Config;
-using log4net;
+﻿using log4net;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using Vetero.Application.Common.Interfaces;
-using Vetero.Domain.Entities.WeatherData;
 
 namespace Vetero.Application.Queries.WeatherStation.CurrentData
 {

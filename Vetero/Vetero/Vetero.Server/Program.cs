@@ -4,7 +4,6 @@ using Vetero.Application;
 using Vetero.Infrastructure;
 using log4net.Config;
 using log4net;
-using Microsoft.AspNetCore;
 using Vetero.Application.Common.Helpers;
 
 

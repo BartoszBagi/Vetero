@@ -1,0 +1,50 @@
+﻿@page "/weather-station"
+@using Vetero.Shared.ViewModels.WeatherStations;
+
+@inject IApiBroker apiBroker;
+@inject NavigationManager _navigator;
+<h1>Dane stacji pogodowej</h1>
+@if(currentData == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+<RadzenCard Class="rz-my-12 rz-mx-auto" Style="max-width: 420px">
+    <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Start" Gap="1rem" Class="rz-p-4">
+        <RadzenStack Gap="0">
+            <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-2 rz-my-0">Data</RadzenText>
+            <RadzenText TextStyle="TextStyle.Body1"><b>@(currentData.Date)</b></RadzenText>
+            <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0">Temperatura</RadzenText>
+            <RadzenText TextStyle="TextStyle.Body1"><b>@currentData.Temperature</b></RadzenText>
+        </RadzenStack>
+    </RadzenStack>
+    <RadzenCard class="rz-background-color-primary-light rz-shadow-0 rz-border-radius-0 rz-p-8" style="margin: 1rem calc(-1 * var(--rz-card-padding));">
+        <RadzenText TextStyle="TextStyle.H6" class="rz-color-on-primary-light"><strong>Opis lub pare info o wietrze czy słoneczności</strong></RadzenText>
+        <RadzenRow RowGap="0">
+            <RadzenColumn SizeSM="4">
+                <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Wiatr</RadzenText>
+                <RadzenText TextStyle="TextStyle.Body1"><b>Wietrznie 50 km/h</b></RadzenText>
+            </RadzenColumn>
+            <RadzenColumn SizeSM="8">
+            </RadzenColumn>
+        </RadzenRow>
+    </RadzenCard>
+    <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.End" Gap="0">
+            <RadzenButton Variant="Variant.Text" Text="Szczegóły" Click="@DetailsButton"/>
+    </RadzenStack>
+</RadzenCard>
+}
+@code{
+    private CurrentDataVm currentData;
+
+    private void DetailsButton()
+    {
+        _navigator.NavigateTo("/weather-station/details");
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        currentData = await apiBroker.GetCurrentDataAsync();
+    }
+}

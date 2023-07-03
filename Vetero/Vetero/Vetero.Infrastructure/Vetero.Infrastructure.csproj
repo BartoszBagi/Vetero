@@ -16,8 +16,4 @@
     <ProjectReference Include="..\Vetero.Application\Vetero.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="NewFolder\" />
-  </ItemGroup>
-
 </Project>

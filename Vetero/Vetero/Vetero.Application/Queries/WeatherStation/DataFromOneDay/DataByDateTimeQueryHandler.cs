@@ -1,12 +1,7 @@
 ﻿using log4net;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Vetero.Application.Common.Interfaces;
 
 namespace Vetero.Application.Queries.WeatherStation.DataFromOneDay
