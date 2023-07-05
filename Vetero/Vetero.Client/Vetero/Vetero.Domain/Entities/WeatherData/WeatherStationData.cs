@@ -3,7 +3,7 @@
     public class WeatherStationData
     {
         public int Id { get; set; }
-        public DateTime DataDate { get; set; }
+        public DateTime Date { get; set; }
         public double Temperature { get; set; }
         public double Sunrise { get; set; }
         public double Sunset { get; set; }

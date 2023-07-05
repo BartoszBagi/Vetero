@@ -1,8 +1,6 @@
 WeatherStation TODO List
 
 
-1. Identity server
--obsługa logiki autoryzacji i uwierzytelnienia jako oddzielny serwer.
 2.Api
 -komunikacja z identity serwer
 -pobranie danych wystawionych przez stację
@@ -10,7 +8,7 @@ WeatherStation TODO List
 -dane chcemy pobierać dla położenia geograficznego naszej stacji w celu porównania wyników
 -statystyka wyników: trafność z rzeczywistymi
 -pobrane dane dla 7 dni w przód np oraz pobranie co godzinę. (co godzinę powiadomienie czy założona pogoda się sprawdziła(opcja do ustalenia))
-3. Client
+3.Client
 -Interfejs użytkownika komunikujący z Api
 -możliwość zakładania konta użytkownika
 -panel użytkownika, podajemy tutaj naszą lokalizację lub pobieramy korzystając z gps (do ustalenia)

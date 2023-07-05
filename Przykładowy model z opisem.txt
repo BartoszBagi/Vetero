@@ -1,0 +1,21 @@
+                new WeatherStationData()
+                {
+                    Id = 1,
+                    DataDate = DateTime.Parse(DateHelper.GetTodayDateString("4", "20")),  // data pomiaru
+                    Temperature = 12,   //temperatura
+                    Sunrise = 6.30, // wschód
+                    Sunset = 22.00, // zachód
+                    Humidity = 50,  // wyrażane w procentach
+                    WindKph = 30, // kilometry na godzine
+                    WindDir = "East",
+                    Pressure = 1006, // wyrażana w Paskalach (Pa)
+                    TotalPrecip_mm = 0, // opady w milimetrach 1 mm odpowiada 1l wody rozlanemu na 1 metrze kwadratowym.
+                                        // W przypadku śniegu odpowiada to wodzie powstałej po jego stopieniu.
+                    TotalPrecip_in = 0, // całkowity opad
+                    Uv = 100 // Natężenie słonecznego promieniowania ultrafioletowego (UV) wyrażone jest wskaźnikiem UV ("Solar UV index").
+                             // Na obszarze Wielkiej Brytanii wskaźnik UV nie przekracza wartości równej 8
+                             // (8 – bardzo rzadko,
+                             // 7 – w dniach szczególnych, przeważnie przez dwa tygodnie w okresie letniego przesilenia).
+                             // Wartości 9 i 10 są charakterystyczne dla obszaru śródziemnomorskiego. Prognoza wskaźnika UV odnosi się do dziennego maksimum.
+
+                },
