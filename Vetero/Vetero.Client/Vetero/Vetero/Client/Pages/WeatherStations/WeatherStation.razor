@@ -3,7 +3,9 @@
 
 @inject IApiBroker apiBroker;
 @inject NavigationManager _navigator;
-<h1>Dane stacji pogodowej</h1>
+
+<h1 class="text-center exotic">Dane stacji pogodowej</h1>
+
 @if(currentData == null)
 {
     <p>Loading...</p>
@@ -12,11 +14,12 @@ else
 {
 <RadzenCard Class="rz-my-12 rz-mx-auto" Style="max-width: 420px">
     <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Start" Gap="1rem" Class="rz-p-4">
+            <RadzenImage Path="@weatherImagePath" Style="width: 150px; height: 150px; border-radius: 50%;"></RadzenImage>
         <RadzenStack Gap="0">
             <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-2 rz-my-0">Data</RadzenText>
             <RadzenText TextStyle="TextStyle.Body1"><b>@(currentData.Date)</b></RadzenText>
             <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0">Temperatura</RadzenText>
-            <RadzenText TextStyle="TextStyle.Body1"><b>@currentData.Temperature</b></RadzenText>
+                <RadzenText TextStyle="TextStyle.Body1"><b>@currentData.Temperature ℃</b></RadzenText>
         </RadzenStack>
     </RadzenStack>
     <RadzenCard class="rz-background-color-primary-light rz-shadow-0 rz-border-radius-0 rz-p-8" style="margin: 1rem calc(-1 * var(--rz-card-padding));">
@@ -37,6 +40,7 @@ else
 }
 @code{
     private CurrentDataVm currentData;
+    private string weatherImagePath = string.Empty;
 
     private void DetailsButton()
     {
@@ -46,5 +50,7 @@ else
     {
         await base.OnInitializedAsync();
         currentData = await apiBroker.GetCurrentDataAsync();
+        weatherImagePath = $"dist/img/weather/{currentData.WeatherImage}";
     }
+
 }

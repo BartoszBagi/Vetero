@@ -16,7 +16,7 @@ namespace Vetero.Application.Queries.WeatherStation.OneDayData
         {
             var result = new List<OneDayDataDto>();
             DateTime date = DateTime.Parse(request.Date);
-            var dataByDateTime = await _context.WeatherStationData.Where(d => d.DataDate.Date == date).ToListAsync();
+            var dataByDateTime = await _context.WeatherStationData.Where(d => d.Date.Date == date).ToListAsync();
             if (dataByDateTime.Any())
             {
                 foreach (var dataItem in dataByDateTime)

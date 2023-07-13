@@ -13,7 +13,7 @@ namespace Vetero.Persistance.Services
                 new WeatherStationData()
                 {
                     Id = 1,
-                    DataDate = DateTime.Parse(DateHelper.GetTodayDateString("4", "20")),  // data pomiaru
+                    Date = DateTime.Parse(DateHelper.GetTodayDateString("4", "20")),  // data pomiaru
                     Temperature = 12,   //temperatura
                     Sunrise = 6.30, // wschód
                     Sunset = 22.00, // zachód
@@ -34,7 +34,7 @@ namespace Vetero.Persistance.Services
                 new WeatherStationData()
                 {
                     Id = 2,
-                    DataDate = DateTime.Parse(DateHelper.GetTodayDateString("4", "45")),
+                    Date = DateTime.Parse(DateHelper.GetTodayDateString("4", "45")),
                     Temperature = 13,
                     Sunrise = 6.30,
                     Sunset = 22.00,
@@ -48,8 +48,8 @@ namespace Vetero.Persistance.Services
                 },
                new WeatherStationData()
                {
-                   Id = 2,
-                   DataDate = DateTime.Parse(DateHelper.GetTodayDateString("5", "30")),
+                   Id = 3,
+                   Date = DateTime.Parse(DateHelper.GetTodayDateString("5", "30")),
                    Temperature = 14,
                    Sunrise = 6.30,
                    Sunset = 22.00,
@@ -63,8 +63,8 @@ namespace Vetero.Persistance.Services
                },
                new WeatherStationData()
                {
-                   Id = 2,
-                   DataDate = DateTime.Parse(DateHelper.GetTodayDateString("6", "00")),
+                   Id = 4,
+                   Date = DateTime.Parse(DateHelper.GetTodayDateString("6", "00")),
                    Temperature = 13,
                    Sunrise = 6.30,
                    Sunset = 22.00,
@@ -78,8 +78,8 @@ namespace Vetero.Persistance.Services
                },
                new WeatherStationData()
                {
-                   Id = 2,
-                   DataDate = DateTime.Parse(DateHelper.GetTodayDateString("6", "45")),
+                   Id = 5,
+                   Date = DateTime.Parse(DateHelper.GetTodayDateString("6", "45")),
                    Temperature = 14,
                    Sunrise = 6.30,
                    Sunset = 22.00,
@@ -93,8 +93,8 @@ namespace Vetero.Persistance.Services
                },
                new WeatherStationData()
                {
-                   Id = 2,
-                   DataDate = DateTime.Parse(DateHelper.GetTodayDateString("7", "00")),
+                   Id = 6,
+                   Date = DateTime.Parse(DateHelper.GetTodayDateString("7", "00")),
                    Temperature = 16,
                    Sunrise = 6.30,
                    Sunset = 22.00,
@@ -108,8 +108,8 @@ namespace Vetero.Persistance.Services
                },
                new WeatherStationData()
                {
-                   Id = 2,
-                   DataDate = DateTime.Parse(DateHelper.GetTodayDateString("7", "25")),
+                   Id = 7,
+                   Date = DateTime.Parse(DateHelper.GetTodayDateString("7", "25")),
                    Temperature = 18,
                    Sunrise = 6.30,
                    Sunset = 22.00,
@@ -123,8 +123,8 @@ namespace Vetero.Persistance.Services
                },
                new WeatherStationData()
                {
-                   Id = 2,
-                   DataDate = DateTime.Parse(DateHelper.GetTodayDateString("8", "00")),
+                   Id = 8,
+                   Date = DateTime.Parse(DateHelper.GetTodayDateString("8", "00")),
                    Temperature = 20,
                    Sunrise = 6.30,
                    Sunset = 22.00,
@@ -138,8 +138,8 @@ namespace Vetero.Persistance.Services
                },
                new WeatherStationData()
                {
-                   Id = 2,
-                   DataDate = DateTime.Parse(DateHelper.GetTodayDateString("8", "20")),
+                   Id = 9,
+                   Date = DateTime.Parse(DateHelper.GetTodayDateString("8", "20")),
                    Temperature = 21,
                    Sunrise = 6.30,
                    Sunset = 22.00,
@@ -153,8 +153,8 @@ namespace Vetero.Persistance.Services
                },
                new WeatherStationData()
                {
-                   Id = 2,
-                   DataDate = DateTime.Parse(DateHelper.GetTodayDateString("8", "45")),
+                   Id = 10,
+                   Date = DateTime.Parse(DateHelper.GetTodayDateString("8", "45")),
                    Temperature = 21,
                    Sunrise = 6.30,
                    Sunset = 22.00,
@@ -168,8 +168,8 @@ namespace Vetero.Persistance.Services
                },
                new WeatherStationData()
                {
-                   Id = 2,
-                   DataDate = DateTime.Parse(DateHelper.GetTodayDateString("9", "20")),
+                   Id = 11,
+                   Date = DateTime.Parse(DateHelper.GetTodayDateString("9", "20")),
                    Temperature = 21,
                    Sunrise = 6.30,
                    Sunset = 22.00,
@@ -183,8 +183,8 @@ namespace Vetero.Persistance.Services
                },
                new WeatherStationData()
                {
-                   Id = 2,
-                   DataDate = DateTime.Parse(DateHelper.GetTodayDateString("9", "45")),
+                   Id = 12,
+                   Date = DateTime.Parse(DateHelper.GetTodayDateString("9", "45")),
                    Temperature = 22,
                    Sunrise = 6.30,
                    Sunset = 22.00,
@@ -198,8 +198,8 @@ namespace Vetero.Persistance.Services
                },
                new WeatherStationData()
                {
-                   Id = 2,
-                   DataDate = DateTime.Parse(DateHelper.GetTodayDateString("10", "00")),
+                   Id = 13,
+                   Date = DateTime.Parse(DateHelper.GetTodayDateString("10", "00")),
                    Temperature = 22,
                    Sunrise = 6.30,
                    Sunset = 22.00,
@@ -213,8 +213,8 @@ namespace Vetero.Persistance.Services
                },
                new WeatherStationData()
                {
-                   Id = 2,
-                   DataDate = DateTime.Parse(DateHelper.GetTodayDateString("11", "00")),
+                   Id = 14,
+                   Date = DateTime.Parse(DateHelper.GetTodayDateString("11", "00")),
                    Temperature = 23,
                    Sunrise = 6.30,
                    Sunset = 22.00,
@@ -228,8 +228,8 @@ namespace Vetero.Persistance.Services
                },
                new WeatherStationData()
                {
-                   Id = 2,
-                   DataDate = DateTime.Parse(DateHelper.GetTodayDateString("12", "00")),
+                   Id = 15,
+                   Date = DateTime.Parse(DateHelper.GetTodayDateString("12", "00")),
                    Temperature = 24,
                    Sunrise = 6.30,
                    Sunset = 22.00,
@@ -243,8 +243,8 @@ namespace Vetero.Persistance.Services
                },
                new WeatherStationData()
                {
-                   Id = 2,
-                   DataDate = DateTime.Parse(DateHelper.GetTodayDateString("13", "00")),
+                   Id = 16,
+                   Date = DateTime.Parse(DateHelper.GetTodayDateString("13", "00")),
                    Temperature = 25,
                    Sunrise = 6.30,
                    Sunset = 22.00,
@@ -258,8 +258,8 @@ namespace Vetero.Persistance.Services
                },
                new WeatherStationData()
                {
-                   Id = 2,
-                   DataDate = DateTime.Parse(DateHelper.GetTodayDateString("14", "00")),
+                   Id = 17,
+                   Date = DateTime.Parse(DateHelper.GetTodayDateString("14", "00")),
                    Temperature = 25,
                    Sunrise = 6.30,
                    Sunset = 22.00,
@@ -273,8 +273,8 @@ namespace Vetero.Persistance.Services
                },
                new WeatherStationData()
                {
-                   Id = 2,
-                   DataDate = DateTime.Parse(DateHelper.GetTodayDateString("15", "00")),
+                   Id = 18,
+                   Date = DateTime.Parse(DateHelper.GetTodayDateString("15", "00")),
                    Temperature = 25,
                    Sunrise = 6.30,
                    Sunset = 22.00,
@@ -288,8 +288,8 @@ namespace Vetero.Persistance.Services
                },
                new WeatherStationData()
                {
-                   Id = 2,
-                   DataDate = DateTime.Parse(DateHelper.GetTodayDateString("16", "00")),
+                   Id = 19,
+                   Date = DateTime.Parse(DateHelper.GetTodayDateString("16", "00")),
                    Temperature = 25,
                    Sunrise = 6.30,
                    Sunset = 22.00,
@@ -303,8 +303,8 @@ namespace Vetero.Persistance.Services
                },
                new WeatherStationData()
                {
-                   Id = 2,
-                   DataDate = DateTime.Parse(DateHelper.GetTodayDateString("17", "00")),
+                   Id = 20,
+                   Date = DateTime.Parse(DateHelper.GetTodayDateString("17", "00")),
                    Temperature = 25,
                    Sunrise = 6.30,
                    Sunset = 22.00,
@@ -318,8 +318,8 @@ namespace Vetero.Persistance.Services
                },
                new WeatherStationData()
                {
-                   Id = 2,
-                   DataDate = DateTime.Parse(DateHelper.GetTodayDateString("18", "00")),
+                   Id = 21,
+                   Date = DateTime.Parse(DateHelper.GetTodayDateString("18", "00")),
                    Temperature = 25,
                    Sunrise = 6.30,
                    Sunset = 22.00,
@@ -333,8 +333,8 @@ namespace Vetero.Persistance.Services
                },
                new WeatherStationData()
                {
-                   Id = 2,
-                   DataDate = DateTime.Parse(DateHelper.GetTodayDateString("19", "00")),
+                   Id = 22,
+                   Date = DateTime.Parse(DateHelper.GetTodayDateString("19", "00")),
                    Temperature = 23,
                    Sunrise = 6.30,
                    Sunset = 22.00,
@@ -348,8 +348,8 @@ namespace Vetero.Persistance.Services
                },
                new WeatherStationData()
                {
-                   Id = 2,
-                   DataDate = DateTime.Parse(DateHelper.GetTodayDateString("20", "00")),
+                   Id = 23,
+                   Date = DateTime.Parse(DateHelper.GetTodayDateString("20", "00")),
                    Temperature = 21,
                    Sunrise = 6.30,
                    Sunset = 22.00,
@@ -363,8 +363,8 @@ namespace Vetero.Persistance.Services
                },
                 new WeatherStationData()
                 {
-                    Id = 2,
-                    DataDate = DateTime.Parse(DateHelper.GetTodayDateString("21", "00")),
+                    Id = 24,
+                    Date = DateTime.Parse(DateHelper.GetTodayDateString("21", "00")),
                     Temperature = 19,
                     Sunrise = 6.30,
                     Sunset = 22.00,
@@ -378,8 +378,8 @@ namespace Vetero.Persistance.Services
                 },
                 new WeatherStationData()
                 {
-                    Id = 2,
-                    DataDate = DateTime.Parse(DateHelper.GetTodayDateString("22", "00")),
+                    Id = 25,
+                    Date = DateTime.Parse(DateHelper.GetTodayDateString("22", "00")),
                     Temperature = 18,
                     Sunrise = 6.30,
                     Sunset = 22.00,

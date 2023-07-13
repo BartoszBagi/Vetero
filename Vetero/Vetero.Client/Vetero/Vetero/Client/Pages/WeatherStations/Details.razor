@@ -1,9 +1,10 @@
 ﻿@page "/weather-station/details"
+@using System.Globalization;
 @using Vetero.Shared.ViewModels.WeatherStations;
 
 @inject IApiBroker apiBroker;
 
-<h1>Dane szczegółowe stacji pogodowej</h1>
+<h1 class="text-center exotic">Dane szczegółowe stacji pogodowej</h1>
 
 @if (currentData == null)
 {
@@ -11,41 +12,105 @@
 }
 else
 {
-    <RadzenCard Class="rz-my-12 rz-mx-auto" Style="max-width: 420px">
-        <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Start" Gap="1rem" Class="rz-p-4">
-            <RadzenStack Gap="0">
-                <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-2 rz-my-0">Data</RadzenText>
-                <RadzenText TextStyle="TextStyle.Body1"><b>@(currentData.Date)</b></RadzenText>
-                <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0">Temperatura</RadzenText>
-                <RadzenText TextStyle="TextStyle.Body1"><b>@currentData.Temperature</b></RadzenText>
-            </RadzenStack>
-        </RadzenStack>
-        <RadzenCard class="rz-background-color-primary-light rz-shadow-0 rz-border-radius-0 rz-p-8" style="margin: 1rem calc(-1 * var(--rz-card-padding));">
-            <RadzenText TextStyle="TextStyle.H6" class="rz-color-on-primary-light"><strong>Opis lub pare info o wietrze czy słoneczności</strong></RadzenText>
-            <RadzenRow RowGap="0">
-                <RadzenColumn SizeSM="4">
-                    <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Wiatr</RadzenText>
-                    <RadzenText TextStyle="TextStyle.Body1"><b>Wietrznie 50 km/h</b></RadzenText>
-                </RadzenColumn>
-                <RadzenColumn SizeSM="8">
-                </RadzenColumn>
-            </RadzenRow>
-        </RadzenCard>
-        <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.End" Gap="0">
-            <RadzenButton Variant="Variant.Text" Text="Szczegóły"/>
-        </RadzenStack>
-    </RadzenCard>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 my-5">
+            <RadzenCard Class="rz-my-6 rz-mx-auto" Style="max-width: 420px">
+                <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Start" Gap="1rem" Class="rz-p-4">
+                    <RadzenStack Gap="0">
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-2 rz-my-0">Data</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Body1"><b>@(currentData.Date)</b></RadzenText>
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0">Temperatura</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Body1"><b>@currentData.Temperature</b></RadzenText>
+                    </RadzenStack>
+                </RadzenStack>
+                <RadzenCard class="rz-background-color-primary-light rz-shadow-0 rz-border-radius-0 rz-p-8" style="margin: 1rem calc(-1 * var(--rz-card-padding));">
+                    <RadzenText TextStyle="TextStyle.H6" class="rz-color-on-primary-light"><strong>Opis lub pare info o wietrze czy słoneczności</strong></RadzenText>
+                    <RadzenRow RowGap="0">
+                        <RadzenColumn SizeSM="4">
+                            <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Wiatr</RadzenText>
+                            <RadzenText TextStyle="TextStyle.Body1"><b>Wietrznie 50 km/h</b></RadzenText>
+                        </RadzenColumn>
+                        <RadzenColumn SizeSM="8">
+                        </RadzenColumn>
+                    </RadzenRow>
+                </RadzenCard>
+            </RadzenCard>
+        </div>
+        <div class="col-sm-6 my-5">
+            <RadzenCard Class="rz-my-6 rz-mx-auto" Style="max-width: 420px">
+                <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Start" Gap="1rem" Class="rz-p-4">
+                    <RadzenStack Gap="0">
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-2 rz-my-0">Data</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Body1"><b>@(currentData.Date)</b></RadzenText>
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0">Temperatura</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Body1"><b>@currentData.Temperature</b></RadzenText>
+                    </RadzenStack>
+                </RadzenStack>
+                <RadzenCard class="rz-background-color-primary-light rz-shadow-0 rz-border-radius-0 rz-p-8" style="margin: 1rem calc(-1 * var(--rz-card-padding));">
+                    <RadzenText TextStyle="TextStyle.H6" class="rz-color-on-primary-light"><strong>Opis lub pare info o wietrze czy słoneczności</strong></RadzenText>
+                    <RadzenRow RowGap="0">
+                        <RadzenColumn SizeSM="4">
+                            <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Wiatr</RadzenText>
+                            <RadzenText TextStyle="TextStyle.Body1"><b>Wietrznie 50 km/h</b></RadzenText>
+                        </RadzenColumn>
+                        <RadzenColumn SizeSM="8">
+                        </RadzenColumn>
+                    </RadzenRow>
+                </RadzenCard>
+            </RadzenCard>
+        </div>
+    </div>
+</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 my-5">
+                <RadzenCard class="w-100 mb-4" Style="display: flex; align-items: center; gap: 0.5rem">
+                    <RadzenCheckBox @bind-Value="@smooth" Name="smooth"></RadzenCheckBox>
+                    <RadzenLabel Text="Smooth" For="smooth" Style="margin-right: 1rem;" />
+                    <RadzenCheckBox @bind-Value="@showDataLabels" Name="dataLabels"></RadzenCheckBox>
+                    <RadzenLabel Text="Show Data Labels" For="dataLabels" />
+                </RadzenCard>
+                <RadzenChart>
+                    <RadzenLineSeries Smooth="@smooth" Data="@oneDayData" CategoryProperty="Date" Title="Temperatura z dnia" LineType="LineType.Dashed" ValueProperty="Temperature">
+                        <RadzenMarkers MarkerType="MarkerType.Circle" />
+                        <RadzenSeriesDataLabels Visible="@showDataLabels" />
+                    </RadzenLineSeries>
+                    <RadzenCategoryAxis Padding="20" Formatter="@FormatAsHour" />
+                    <RadzenValueAxis Formatter="@FormatAsCelsius">
+                        <RadzenGridLines Visible="true" />
+                        <RadzenAxisTitle Text="Stopnie Celsjusza" />
+                    </RadzenValueAxis>
+                </RadzenChart>
+            </div>
+        </div>
+    </div>
 }
 
 @code {
     private IEnumerable<OneDayDataVm> oneDayData;
     private CurrentDataVm currentData;
+    bool smooth = true;
+    bool showDataLabels = false;
 
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        oneDayData = await apiBroker.GetOneDayData(DateTime.Now.ToString("dd-MM-yyyy"));
+        oneDayData = await apiBroker.GetOneDayData(DateTime.Now.AddDays(-8).ToString("dd-MM-yyyy"));
         if(oneDayData.Any())
             currentData = new CurrentDataVm() { Date = oneDayData.FirstOrDefault().Date, Temperature = oneDayData.FirstOrDefault().Temperature };
+    }
+
+    string FormatAsHour(object value)
+    {
+        if (value != null)
+        {
+            return Convert.ToDateTime(value).ToString("HH");
+        }
+        return string.Empty;
+    }
+    string FormatAsCelsius(object value)
+    {
+        return ((double)value).ToString();
     }
 }

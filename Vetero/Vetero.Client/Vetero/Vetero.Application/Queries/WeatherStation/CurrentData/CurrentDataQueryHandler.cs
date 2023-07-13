@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using Vetero.Application.Common.Interfaces;
+using Vetero.Application.Helpers;
 using Vetero.Shared.ViewModels.WeatherStations;
 
 namespace Vetero.Application.Queries.WeatherStation.CurrentData
@@ -23,7 +24,10 @@ namespace Vetero.Application.Queries.WeatherStation.CurrentData
             {
                 var result = await _context.WeatherStationData.OrderBy(x => x).LastOrDefaultAsync();
                 if (result != null)
-                    return new CurrentDataVm(result);
+                {
+                    var imageName = WeatherImageHelper.SetWeatherImage(result);
+                    return new CurrentDataVm(result) { WeatherImage = imageName };
+                }
                 else
                     throw new FileNotFoundException(NoWeatherDataError);
             }

@@ -6,6 +6,10 @@ namespace Vetero.Shared.ViewModels.WeatherStations
     {
         public DateTime Date { get; set; }
         public double Temperature { get; set; }
+        public string WeatherImage { get; set; }
+        public double WindKph { get; set; }
+        public string WindDir { get; set; }
+        public double TotalPrecip_in { get; set; }
 
         public CurrentDataVm()
         {
@@ -14,8 +18,11 @@ namespace Vetero.Shared.ViewModels.WeatherStations
 
         public CurrentDataVm(WeatherStationData data)
         {
-            Date = data.DataDate;
+            Date = data.Date;
             Temperature = data.Temperature;
+            WindKph = data.WindKph;
+            WindDir = data.WindDir;
+            TotalPrecip_in = data.TotalPrecip_in;
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Vetero.Application.Queries.WeatherStation.OneDayData
 
         public OneDayDataDto(WeatherStationData data)
         {
-            Date = data.DataDate; 
+            Date = data.Date; 
             Temperature = data.Temperature;
             Sunrise = data.Sunrise;
             Sunset = data.Sunset;
