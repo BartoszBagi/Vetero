@@ -10,6 +10,7 @@ namespace Vetero.Shared.ViewModels.WeatherStations
         public double WindKph { get; set; }
         public string WindDir { get; set; }
         public double TotalPrecip_in { get; set; }
+        public string WeatherDescription { get; set; }
 
         public CurrentDataVm()
         {

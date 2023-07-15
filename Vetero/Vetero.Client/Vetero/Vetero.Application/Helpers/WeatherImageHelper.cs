@@ -7,7 +7,7 @@ namespace Vetero.Application.Helpers
     {
         public static string SetWeatherImage(WeatherStationData data)
         {
-            bool isWindy = data.WindKph < 20 ? true : false;
+            bool isWindy = data.WindKph > 20 ? true : false;
             //bool isModerateBreeze = data.WindKph > 20 && data.WindKph < 28 ? true : false;
             //bool isFreshBreeze = data.WindKph > 28 && data.WindKph < 38 ? true : false;
             //bool isStrongBreeze = data.WindKph > 39 && data.WindKph < 49 ? true : false;
@@ -41,7 +41,7 @@ namespace Vetero.Application.Helpers
                 return WeatherImageTypes.Rainy;
             if (isPouringRain && isTempestuousRain)
                 return WeatherImageTypes.RainyThunder;
-            if(!isCloudyChance && !isWindy)
+            if(!isCloudyChance && !isWindy && !isRainy)
                 return WeatherImageTypes.Sunny;
             if (isWindy && !isRainy)
                 return WeatherImageTypes.Windy;

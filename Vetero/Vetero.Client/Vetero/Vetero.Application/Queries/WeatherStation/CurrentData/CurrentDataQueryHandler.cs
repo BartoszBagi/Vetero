@@ -26,7 +26,8 @@ namespace Vetero.Application.Queries.WeatherStation.CurrentData
                 if (result != null)
                 {
                     var imageName = WeatherImageHelper.SetWeatherImage(result);
-                    return new CurrentDataVm(result) { WeatherImage = imageName };
+                    var weatherDescription = WeatherDescriptionHelper.SetWeatherDescription(imageName);
+                    return new CurrentDataVm(result) { WeatherImage = imageName, WeatherDescription = weatherDescription };
                 }
                 else
                     throw new FileNotFoundException(NoWeatherDataError);
