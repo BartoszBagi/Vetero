@@ -96,7 +96,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        oneDayData = await apiBroker.GetOneDayData(DateTime.Now.AddDays(-8).ToString("dd-MM-yyyy"));
+        oneDayData = await apiBroker.GetOneDayData(DateTime.Now.AddDays(-10).ToString("dd-MM-yyyy"));
         if(oneDayData.Any())
             currentData = new CurrentDataVm() { Date = oneDayData.FirstOrDefault().Date, Temperature = oneDayData.FirstOrDefault().Temperature };
     }
