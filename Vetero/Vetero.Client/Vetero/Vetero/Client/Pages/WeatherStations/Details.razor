@@ -21,7 +21,7 @@ else
                         <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-2 rz-my-0">Data</RadzenText>
                         <RadzenText TextStyle="TextStyle.Body1"><b>@(currentData.Date)</b></RadzenText>
                         <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0">Temperatura</RadzenText>
-                        <RadzenText TextStyle="TextStyle.Body1"><b>@currentData.Temperature</b></RadzenText>
+                            <RadzenText TextStyle="TextStyle.Body1"><b>@currentData.Temperature ℃</b></RadzenText>
                     </RadzenStack>
                 </RadzenStack>
                 <RadzenCard class="rz-background-color-primary-light rz-shadow-0 rz-border-radius-0 rz-p-8" style="margin: 1rem calc(-1 * var(--rz-card-padding));">
@@ -44,7 +44,7 @@ else
                         <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-2 rz-my-0">Data</RadzenText>
                         <RadzenText TextStyle="TextStyle.Body1"><b>@(currentData.Date)</b></RadzenText>
                         <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0">Temperatura</RadzenText>
-                        <RadzenText TextStyle="TextStyle.Body1"><b>@currentData.Temperature</b></RadzenText>
+                            <RadzenText TextStyle="TextStyle.Body1"><b>@currentData.Temperature ℃</b></RadzenText>
                     </RadzenStack>
                 </RadzenStack>
                 <RadzenCard class="rz-background-color-primary-light rz-shadow-0 rz-border-radius-0 rz-p-8" style="margin: 1rem calc(-1 * var(--rz-card-padding));">
@@ -62,27 +62,25 @@ else
         </div>
     </div>
 </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 my-5">
-                <RadzenCard class="w-100 mb-4" Style="display: flex; align-items: center; gap: 0.5rem">
-                    <RadzenCheckBox @bind-Value="@smooth" Name="smooth"></RadzenCheckBox>
-                    <RadzenLabel Text="Smooth" For="smooth" Style="margin-right: 1rem;" />
-                    <RadzenCheckBox @bind-Value="@showDataLabels" Name="dataLabels"></RadzenCheckBox>
-                    <RadzenLabel Text="Show Data Labels" For="dataLabels" />
-                </RadzenCard>
-                <RadzenChart>
-                    <RadzenLineSeries Smooth="@smooth" Data="@oneDayData" CategoryProperty="Date" Title="Temperatura z dnia" LineType="LineType.Dashed" ValueProperty="Temperature">
-                        <RadzenMarkers MarkerType="MarkerType.Circle" />
-                        <RadzenSeriesDataLabels Visible="@showDataLabels" />
-                    </RadzenLineSeries>
-                    <RadzenCategoryAxis Padding="20" Formatter="@FormatAsHour" />
-                    <RadzenValueAxis Formatter="@FormatAsCelsius">
-                        <RadzenGridLines Visible="true" />
-                        <RadzenAxisTitle Text="Stopnie Celsjusza" />
-                    </RadzenValueAxis>
-                </RadzenChart>
-            </div>
+    <div class="row">
+        <div class="col-sm-12 my-5">
+            <RadzenCard class="w-100 mb-4" Style="display: flex; align-items: center; gap: 0.5rem">
+                <RadzenCheckBox @bind-Value="@smooth" Name="smooth"></RadzenCheckBox>
+                <RadzenLabel Text="Smooth" For="smooth" Style="margin-right: 1rem;" />
+                <RadzenCheckBox @bind-Value="@showDataLabels" Name="dataLabels"></RadzenCheckBox>
+                <RadzenLabel Text="Show Data Labels" For="dataLabels" />
+            </RadzenCard>
+            <RadzenChart>
+                <RadzenLineSeries Smooth="@smooth" Data="@oneDayData" CategoryProperty="Date" Title="Godzina" LineType="LineType.Dashed" ValueProperty="Temperature">
+                    <RadzenMarkers MarkerType="MarkerType.Circle" />
+                    <RadzenSeriesDataLabels Visible="@showDataLabels" />
+                </RadzenLineSeries>
+                <RadzenCategoryAxis Padding="20" Formatter="@FormatAsHour" />
+                <RadzenValueAxis Formatter="@FormatAsCelsius">
+                    <RadzenGridLines Visible="true" />
+                    <RadzenAxisTitle Text="℃" />
+                </RadzenValueAxis>
+            </RadzenChart>
         </div>
     </div>
 }
