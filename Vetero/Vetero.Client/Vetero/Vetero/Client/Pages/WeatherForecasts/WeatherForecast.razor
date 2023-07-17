@@ -1,7 +1,25 @@
 ﻿@page "/weather-forecast"
+@using Vetero.Client.Components
+@using Vetero.Shared.ViewModels.Rapid.ForecastItems;
+@inject IApiBroker broker
 
-<h1 class="text-center exotic">Dane pogodowe</h1>
-
+@if (forecast == null)
+{
+    <p>Loading....</p>
+}
+else
+{
+    <WeatherDisplay forecastDay="forecastDay" forecast="forecast" avgCurrent="avgCurrent" />
+}
 @code {
-
+    private ForecastWeather forecast;
+    private IEnumerable<Forecastday> forecastDay;
+    private Forecastday avgCurrent;
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        forecast = await broker.GetForecastWeatherAsync("Siedlce", null, 14, null);
+        forecastDay = forecast.forecast.forecastday;
+        avgCurrent = forecastDay.FirstOrDefault();
+    }
 }

@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Newtonsoft.Json;
 using Vetero.Application.Common.Interfaces;
-using Vetero.Domain.Entities.Rapid.RealTime;
+using Vetero.Shared.ViewModels.Rapid.RealTime;
 
 namespace Vetero.Application.Queries.Rapid.RealTime
 {

@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Vetero.Domain.Entities.Rapid.RealTime;
+using Vetero.Shared.ViewModels.Rapid.RealTime;
 
 namespace Vetero.Application.Queries.Rapid.RealTime
 {

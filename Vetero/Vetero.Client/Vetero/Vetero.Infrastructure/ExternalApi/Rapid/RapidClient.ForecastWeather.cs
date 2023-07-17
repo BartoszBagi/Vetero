@@ -8,9 +8,9 @@ namespace Vetero.Infrastructure.ExternalApi.Rapid
         public async Task<string> GetForecastWeatherAsync(ForecastQuery query, CancellationToken cancellationToken)
         {
             var urlBuilder = new StringBuilder();
-            var days = query.Days != null ? $"days={query.Days}" : "";
-            var lang = query.Lang != null ? $"lang={query.Lang}" : "";
-            var date = query.Date != null ? $"dt={query.Date}" : "";
+            var days = query.Days != null ? $"&days={query.Days}" : "";
+            var lang = query.Lang != null ? $"&lang={query.Lang}" : "";
+            var date = query.Date != null ? $"&dt={query.Date}" : "";
 
             urlBuilder.Append(!string.IsNullOrEmpty(_baseUrl) ? _baseUrl : "").Append($"forecast.json?q={query.Location}")
                 .Append($"{days}{lang}{date}");
@@ -42,7 +42,7 @@ namespace Vetero.Infrastructure.ExternalApi.Rapid
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception(ex.Message);
             }
         }
     }

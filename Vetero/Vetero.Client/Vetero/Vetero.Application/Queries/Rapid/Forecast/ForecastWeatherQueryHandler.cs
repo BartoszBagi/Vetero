@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Vetero.Application.Common.Interfaces;
 using Vetero.Application.External.Queries;
-using Vetero.Domain.Entities.Rapid.ForecastItems;
+using Vetero.Shared.ViewModels.Rapid.ForecastItems;
 
 namespace Vetero.Application.Queries.Rapid.Forecast
 {
