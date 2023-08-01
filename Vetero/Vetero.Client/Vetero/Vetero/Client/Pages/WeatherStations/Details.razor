@@ -1,6 +1,7 @@
 ﻿@page "/weather-station/details"
 @using System.Globalization;
 @using System.Text.Json;
+@using Vetero.Shared.Enums;
 @using Vetero.Shared.ViewModels.WeatherStations;
 
 @inject IApiBroker apiBroker;
@@ -43,7 +44,7 @@ else
         <RadzenTabsItem Text="Średnia">
             <div class="row">
         <div class="col-sm-12 my-5">
-            <RadzenCard Class="rz-my-6 rz-mx-auto" Style="max-width: 420px" @onclick="() => GoTo()">
+            <RadzenCard Class="rz-my-6 rz-mx-auto" Style="max-width: 420px">
                 <RadzenCard>               
                     <RadzenText TextStyle="TextStyle.H6" class="text-center rz-mt-2 rz-my-0">Uśrednione dane</RadzenText>
                         <RadzenText TextStyle="TextStyle.H6" class="text-center rz-color-on-primary-light"><strong>Szczegóły</strong></RadzenText>
@@ -85,24 +86,25 @@ else
     </div>
         </RadzenTabsItem>
         <RadzenTabsItem Text="Wykres">
-            <p>Wykres do przerobienia na edytowalny np. możliwość ustawienia danych np godzina i opad deszczu. Do wyrzucenia jako oddzielna strona lub modal lub slajd do przemyślenia.</p>
+                    <RadzenDropDown Data="@(Enum.GetValues(typeof(CategoryData)).Cast<Enum>())" @bind-Value=@categoryData onchange="@OnSomethingChanged(null)"
+                    AllowClear="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" Style="width: 100%; max-width: 400px;">
+            </RadzenDropDown>
             <div class="row">
                 <div class="col-sm-12 my-5">
                     <RadzenCard class="w-100 mb-4" Style="display: flex; align-items: center; gap: 0.5rem">
                         <RadzenCheckBox @bind-Value="@showDataLabels" Name="dataLabels"></RadzenCheckBox>
                         <RadzenLabel Text="Wartości" For="dataLabels" />
                     </RadzenCard>
-                    <RadzenChart>
-                        <RadzenLineSeries Smooth="true" Data="@oneDayData" CategoryProperty="Date" Title="Temperatura" LineType="LineType.Dashed" ValueProperty="Temperature">
+                    <RadzenChart itemid="chart0">
+                            <RadzenLineSeries Smooth="true" Data="@oneDayData" CategoryProperty="Date" Title="@categoryData.GetDisplayDescription()" LineType="LineType.Dashed" ValueProperty="@categoryData.ToString()">
                             <RadzenMarkers MarkerType="MarkerType.Circle" />
                             <RadzenSeriesDataLabels Visible="@showDataLabels" />
                         </RadzenLineSeries>
                         <RadzenCategoryAxis Padding="20" Formatter="@FormatAsHour"> 
                             <RadzenAxisTitle Text="Godzina" />   
                         </RadzenCategoryAxis>                  
-                        <RadzenValueAxis Formatter="@FormatAsCelsius">
-                            <RadzenGridLines Visible="true" />
-                            <RadzenAxisTitle Text="℃" />              
+                        <RadzenValueAxis Formatter="@FormatAsString">
+                            <RadzenGridLines Visible="true" />             
                         </RadzenValueAxis>
                     </RadzenChart>
                 </div>
@@ -119,6 +121,7 @@ else
     private AvgDayDataVm avgData;
     bool frozen;
     bool showDataLabels = false;
+    CategoryData categoryData;
 
     protected override async Task OnInitializedAsync()
     {
@@ -141,14 +144,15 @@ else
         }
         return string.Empty;
     }
-    string FormatAsCelsius(object value)
+    string FormatAsString(object value)
     {
         return ((double)value).ToString();
     }
-    private void GoTo()
+    private object OnSomethingChanged(object? sender)
     {
-        var jsonParameter = JsonSerializer.Serialize(avgData);
-        NavigationManager.NavigateTo($"/weather-station/details/avg/{jsonParameter}");
+        oneDayData = oneDayData.ToList();
+        return sender;
     }
+
 
 }
