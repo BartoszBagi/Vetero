@@ -18,34 +18,45 @@
         </div>
     </div>
 </div>
-
-@foreach (var date in forecastDay.Select(l => l.date).Distinct())
-{
-    <div class="row mb-4">
-        <div class="col-md-12">
-            <h2>Weather forecast for @date)</h2>
-            <div class="row row-cols-1 row-cols-md-4 g-4">
-                @foreach (var item in forecastDay
-                .Where(l => l.date == date)
-                .OrderBy(l => l.date))
-                {
-                    <div class="col">
-                        <WeatherCard DateTime="@item.date"
-                                WeatherDescription="@item.day.condition.text"
-                                Temperature="@item.day.avgtemp_c"
-                                TemperatureFeelsLike="@item.hour.FirstOrDefault().feelslike_c"
-                                TemperatureMax="@item.day.maxtemp_c"
-                                TemperatureMin="@item.day.mintemp_c"
-                                Humidity="@item.day.avghumidity"
-                                WindSpeed="@item.day.avgvis_km" />
-                    </div>
-                }
-            </div>
-        </div>
-    </div>
-}
+<RadzenPanel AllowCollapse="true" Class="rz-my-10 rz-mx-auto" Style="width: 700px;"
+             Expand=@(() => Change("Panel expanded")) Collapse=@(() => Change("Panel collapsed"))>
+    <HeaderTemplate>
+        <RadzenText TextStyle="TextStyle.H6" Class="rz-display-flex rz-align-items-center rz-m-0">
+            <RadzenIcon Icon="list" class="rz-mr-1" /><b>Prognoza</b>
+        </RadzenText>
+    </HeaderTemplate>
+    <ChildContent>
+        <RadzenCard class="rz-mt-4">
+            <RadzenDataList PageSize="4" WrapItems="true" AllowPaging="true"
+                            Data="@forecastDay" TItem="Forecastday">
+                <Template Context="forecastDay">
+                    <RadzenCard Style="width: 250px">
+                        <RadzenRow>
+                            <RadzenStack class="rz-mt-4">
+                                <WeatherCard DateTime="@forecastDay.date"
+                                             WeatherDescription="@forecastDay.day.condition.text"
+                                             Temperature="@forecastDay.day.avgtemp_c"
+                                             TemperatureFeelsLike="@forecastDay.hour.Where(x => x.temp_c == @forecastDay.hour.Max(x => x.temp_c)).FirstOrDefault().feelslike_c"
+                                             TemperatureMax="@forecastDay.day.maxtemp_c"
+                                             TemperatureMin="@forecastDay.day.mintemp_c"
+                                             Humidity="@forecastDay.day.avghumidity"
+                                             WindSpeed="@forecastDay.day.avgvis_km" />
+                            </RadzenStack>
+                       </RadzenRow>
+                        </RadzenCard>
+                    </Template>
+                </RadzenDataList>
+            </RadzenCard>
+        </ChildContent>
+    </RadzenPanel>
 @code {
     [Parameter] public ForecastWeather forecast { get; set; }
     [Parameter] public IEnumerable<Forecastday> forecastDay { get; set; }
     [Parameter] public Forecastday avgCurrent { get; set; }
+
+
+    void Change(string text)
+    {
+        Console.Write(text);
+    }
 }
