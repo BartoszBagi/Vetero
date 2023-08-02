@@ -12,7 +12,7 @@
 }
 else
 {
-<RadzenCard Class="rz-my-12 rz-mx-auto" Style="max-width: 420px">
+    <RadzenCard Class="rz-background-color-success-lighter rz-shadow-10 rz-my-12 rz-mx-auto" Style="max-width: 420px">
     <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Start" Gap="1rem" Class="rz-p-4">
             <RadzenImage Path="@weatherImagePath" Style="width: 150px; height: 150px; border-radius: 50%;"></RadzenImage>
         <RadzenStack Gap="0">
@@ -22,7 +22,7 @@ else
             <RadzenText TextStyle="TextStyle.Body1"><b>@currentData.Temperature ℃</b></RadzenText>
         </RadzenStack>
     </RadzenStack>
-    <RadzenCard class="rz-background-color-primary-light rz-shadow-0 rz-border-radius-0 rz-p-8" style="margin: 1rem calc(-1 * var(--rz-card-padding));">
+        <RadzenCard class="rz-background-color-success-lighter rz-shadow-5 rz-border-radius-0 rz-p-8" style="margin: 1rem calc(-1 * var(--rz-card-padding));">
             <RadzenText TextStyle="TextStyle.H6" class="text-center rz-color-on-primary-light"><strong>@currentData.WeatherDescription</strong></RadzenText>
         <RadzenRow RowGap="0">
             <RadzenColumn SizeSM="6">

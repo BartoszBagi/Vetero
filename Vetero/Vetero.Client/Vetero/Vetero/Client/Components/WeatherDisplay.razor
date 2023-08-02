@@ -1,62 +1,72 @@
 ﻿@using Vetero.Shared.ViewModels.Rapid.ForecastItems;
 
 <h1 class="text-center exotic">Dane pogodowe</h1>
-<div class="row mb-4">
-    <div class="col-md-12">
-        <h2 class="d-inline me-2">Aktualna pogoda dla @forecast.location.name</h2>
+<div class="row mb-12">
+    <RadzenTabs TabPosition="TabPosition.Top" RenderMode="TabRenderMode.Client">
+        <Tabs>
+            <RadzenTabsItem Text="Aktualna">
+                <div class="row">
+                    <div class="col-sm-12 my-5">
+                        <RadzenPanel AllowCollapse="true" Class="rz-my-10 rz-mx-auto" Style="width: 300px;">
+                            <HeaderTemplate>
+                                <RadzenText TextStyle="TextStyle.H6" Class="rz-display-flex rz-align-items-center rz-m-0">
+                                    <b>Aktualna pogoda dla @forecast.location.name</b>
+                                </RadzenText>
+                            </HeaderTemplate>
+                            <ChildContent>
+                                <WeatherCard WeatherDescription="@avgCurrent.day.condition.text"
+                                             Temperature="@avgCurrent.day.avgtemp_c"
+                                             TemperatureFeelsLike="@forecast.current.feelslike_c"
+                                             TemperatureMax="@avgCurrent.day.maxtemp_c"
+                                             TemperatureMin="@avgCurrent.day.mintemp_c"
+                                             Humidity="@avgCurrent.day.avghumidity"
+                                             WindSpeed="@avgCurrent.day.avgvis_km" />
+                            </ChildContent>
+                        </RadzenPanel>
+                    </div>
+                </div>
+            </RadzenTabsItem>
+            <RadzenTabsItem Text="Prognoza">
+                <div class="row rz-shadow-10">
+                    <RadzenPanel AllowCollapse="true" Class="rz-my-10 rz-mx-auto" Style="width: 400px;">
+                        <HeaderTemplate>
+                            <RadzenText TextStyle="TextStyle.H6" Class="rz-display-flex rz-align-items-center rz-m-0">
+                                <RadzenIcon Icon="list" class="rz-mr-1" /><b>Prognoza</b>
+                            </RadzenText>
+                        </HeaderTemplate>
+                        <ChildContent>
+                            <RadzenDataList PageSize="1" AllowPaging="true"
+                                            Data="@forecastDay" TItem="Forecastday">
+                                <Template Context="forecastDay">
+                                    <WeatherCard DateTime="@forecastDay.date"
+                                                 WeatherDescription="@forecastDay.day.condition.text"
+                                                 Temperature="@forecastDay.day.avgtemp_c"
+                                                 TemperatureFeelsLike="@forecastDay.hour.Where(x => x.temp_c == @forecastDay.hour.Max(x => x.temp_c)).FirstOrDefault().feelslike_c"
+                                                 TemperatureMax="@forecastDay.day.maxtemp_c"
+                                                 TemperatureMin="@forecastDay.day.mintemp_c"
+                                                 Humidity="@forecastDay.day.avghumidity"
+                                                 WindSpeed="@forecastDay.day.avgvis_km" />
+                                </Template>
+                            </RadzenDataList>
+                        </ChildContent>
+                    </RadzenPanel>
+                </div>
+            </RadzenTabsItem>
+            <RadzenTabsItem Text="Lista">
+               
+            </RadzenTabsItem>
+            <RadzenTabsItem Text="Wykres">
 
-        <div class="row row-cols-1 row-cols-md-5 g-4">
-            <div class="col">
-                <WeatherCard WeatherDescription="@avgCurrent.day.condition.text"
-                                Temperature="@avgCurrent.day.avgtemp_c"
-                                TemperatureFeelsLike="@forecast.current.feelslike_c"
-                                TemperatureMax="@avgCurrent.day.maxtemp_c"
-                                TemperatureMin="@avgCurrent.day.mintemp_c"
-                                Humidity="@avgCurrent.day.avghumidity"
-                                WindSpeed="@avgCurrent.day.avgvis_km" />
-            </div>
-        </div>
-    </div>
+            </RadzenTabsItem>
+        </Tabs>
+    </RadzenTabs>
+
+        
 </div>
-<RadzenPanel AllowCollapse="true" Class="rz-my-10 rz-mx-auto" Style="width: 700px;"
-             Expand=@(() => Change("Panel expanded")) Collapse=@(() => Change("Panel collapsed"))>
-    <HeaderTemplate>
-        <RadzenText TextStyle="TextStyle.H6" Class="rz-display-flex rz-align-items-center rz-m-0">
-            <RadzenIcon Icon="list" class="rz-mr-1" /><b>Prognoza</b>
-        </RadzenText>
-    </HeaderTemplate>
-    <ChildContent>
-        <RadzenCard class="rz-mt-4">
-            <RadzenDataList PageSize="4" WrapItems="true" AllowPaging="true"
-                            Data="@forecastDay" TItem="Forecastday">
-                <Template Context="forecastDay">
-                    <RadzenCard Style="width: 250px">
-                        <RadzenRow>
-                            <RadzenStack class="rz-mt-4">
-                                <WeatherCard DateTime="@forecastDay.date"
-                                             WeatherDescription="@forecastDay.day.condition.text"
-                                             Temperature="@forecastDay.day.avgtemp_c"
-                                             TemperatureFeelsLike="@forecastDay.hour.Where(x => x.temp_c == @forecastDay.hour.Max(x => x.temp_c)).FirstOrDefault().feelslike_c"
-                                             TemperatureMax="@forecastDay.day.maxtemp_c"
-                                             TemperatureMin="@forecastDay.day.mintemp_c"
-                                             Humidity="@forecastDay.day.avghumidity"
-                                             WindSpeed="@forecastDay.day.avgvis_km" />
-                            </RadzenStack>
-                       </RadzenRow>
-                        </RadzenCard>
-                    </Template>
-                </RadzenDataList>
-            </RadzenCard>
-        </ChildContent>
-    </RadzenPanel>
 @code {
     [Parameter] public ForecastWeather forecast { get; set; }
     [Parameter] public IEnumerable<Forecastday> forecastDay { get; set; }
     [Parameter] public Forecastday avgCurrent { get; set; }
 
 
-    void Change(string text)
-    {
-        Console.Write(text);
-    }
 }

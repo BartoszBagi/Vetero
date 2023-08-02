@@ -13,105 +13,102 @@
 {
     <p>Brak danych... Wybierz "05-07-2023" w celu uzyskania danych testowych.</p>
     <div class="rz-p-12 rz-text-align-center">
-        <RadzenDatePicker @bind-Value=@dateParameter Change="@(() => GetSpecifiedDayDetails())" />
+        <RadzenDatePicker class="rz-shadow-3" @bind-Value=@dateParameter Change="@(() => GetSpecifiedDayDetails())" />
     </div>
 }
 else
 {
 <div class="container">
     <div class="rz-p-12 rz-text-align-center">
-        <RadzenDatePicker @bind-Value=@dateParameter Change="@(() => GetSpecifiedDayDetails())" />
+        <RadzenDatePicker class="rz-shadow-3" @bind-Value=@dateParameter Change="@(() => GetSpecifiedDayDetails())" />
     </div>
     <RadzenTabs TabPosition="TabPosition.Top" RenderMode="TabRenderMode.Client" >
-    <Tabs>
-        <RadzenTabsItem Text="Dane z dnia">
-            <div class="row">
-            <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" GridLines="DataGridGridLines.Horizontal" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" Data="@oneDayData" TItem="OneDayDataVm"
-                    ColumnWidth="140px" LogicalFilterOperator="LogicalFilterOperator.Or" Style="height:500px">
-            <Columns>
-                    <RadzenDataGridColumn TItem="OneDayDataVm" Property="Date" Filterable="false" Title="Godzina" Frozen="true" Width="100px" FormatString="{0:t}"/>
-                    <RadzenDataGridColumn TItem="OneDayDataVm" Property="Temperature" Filterable="false"  Title="Temperatura" Frozen="true" FormatString="{0}℃" />
-                    <RadzenDataGridColumn TItem="OneDayDataVm" Property="Humidity" Filterable="false" Title="Wilgotność" Frozen="true" Width="150px" FormatString="{0}%" />
-                    <RadzenDataGridColumn TItem="OneDayDataVm" Property="WindKph" Filterable="false" Title="Prędkość wiatru" Frozen="true" FormatString="{0}km/h" />
-                    <RadzenDataGridColumn TItem="OneDayDataVm" Property="WindDir" Filterable="false" Title="Kierunek wiatru" Frozen="true" />
-                    <RadzenDataGridColumn TItem="OneDayDataVm" Property="Pressure" Filterable="false" Title="Ciśnienie" Frozen="true" FormatString="{0}Pa" />
-                    <RadzenDataGridColumn TItem="OneDayDataVm" Property="TotalPrecip_in" Filterable="false" Title="Opad deszczu" Frozen="true" FormatString="{0}l/m²" />
-                    <RadzenDataGridColumn TItem="OneDayDataVm" Property="Uv" Filterable="false" Title="Uv" Frozen="true" Width="80px" />
-            </Columns>
-        </RadzenDataGrid>
-    </div>
-        </RadzenTabsItem>
-        <RadzenTabsItem Text="Średnia">
-            <div class="row">
-        <div class="col-sm-12 my-5">
-            <RadzenCard Class="rz-my-6 rz-mx-auto" Style="max-width: 420px">
-                <RadzenCard>               
-                    <RadzenText TextStyle="TextStyle.H6" class="text-center rz-mt-2 rz-my-0">Uśrednione dane</RadzenText>
-                        <RadzenText TextStyle="TextStyle.H6" class="text-center rz-color-on-primary-light"><strong>Szczegóły</strong></RadzenText>
-                        <RadzenRow RowGap="0">
-                            <RadzenColumn SizeSM="6">
-                                <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0">Data</RadzenText>
-                                <RadzenText TextStyle="TextStyle.Body1"><b >@avgData.Date.ToString()</b></RadzenText>
-                            </RadzenColumn>
-                            <RadzenColumn SizeSM="6">
-                                <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0">Temperatura</RadzenText>
-                                <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.Temperature ℃</b></RadzenText>
-                            </RadzenColumn>
-                        </RadzenRow>               
-                </RadzenCard>
-                <RadzenCard class="rz-background-color-primary-light rz-shadow-0 rz-border-radius-0 rz-p-8" style="margin: 1rem calc(-1 * var(--rz-card-padding));">
-                    <RadzenText TextStyle="TextStyle.H6" class="text-center rz-color-on-primary-light"><strong>Szczegóły</strong></RadzenText>
-                    <RadzenRow RowGap="0">
-                        <RadzenColumn SizeSM="6">
-                            <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Prędkość wiatru</RadzenText>
-                                <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.WindKph km/h</b></RadzenText>
-                                <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Kierunek wiatru</RadzenText>
-                                <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.WindDir</b></RadzenText>
-                                <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Uv</RadzenText>
-                                <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.Uv</b></RadzenText>
-                        </RadzenColumn>
-                            <RadzenColumn SizeSM="6">
-                                <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Deszcz</RadzenText>
-                                <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.TotalPrecip_in l/m²</b></RadzenText>
-                                <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Ciśnienie</RadzenText>
-                                <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.Pressure Pa</b></RadzenText>
-                                <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Wilgotność</RadzenText>
-                                <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.Humidity %</b></RadzenText>
-                                
-                            </RadzenColumn>
-                    </RadzenRow>
-                </RadzenCard>
-            </RadzenCard>
-        </div>
-    </div>
-        </RadzenTabsItem>
-        <RadzenTabsItem Text="Wykres">
-                    <RadzenDropDown Data="@(Enum.GetValues(typeof(CategoryData)).Cast<Enum>())" @bind-Value=@categoryData onchange="@OnSomethingChanged(null)"
-                    AllowClear="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" Style="width: 100%; max-width: 400px;">
-            </RadzenDropDown>
-            <div class="row">
-                <div class="col-sm-12 my-5">
-                    <RadzenCard class="w-100 mb-4" Style="display: flex; align-items: center; gap: 0.5rem">
-                        <RadzenCheckBox @bind-Value="@showDataLabels" Name="dataLabels"></RadzenCheckBox>
-                        <RadzenLabel Text="Wartości" For="dataLabels" />
-                    </RadzenCard>
-                    <RadzenChart itemid="chart0">
-                            <RadzenLineSeries Smooth="true" Data="@oneDayData" CategoryProperty="Date" Title="@categoryData.GetDisplayDescription()" LineType="LineType.Dashed" ValueProperty="@categoryData.ToString()">
-                            <RadzenMarkers MarkerType="MarkerType.Circle" />
-                            <RadzenSeriesDataLabels Visible="@showDataLabels" />
-                        </RadzenLineSeries>
-                        <RadzenCategoryAxis Padding="20" Formatter="@FormatAsHour"> 
-                            <RadzenAxisTitle Text="Godzina" />   
-                        </RadzenCategoryAxis>                  
-                        <RadzenValueAxis Formatter="@FormatAsString">
-                            <RadzenGridLines Visible="true" />             
-                        </RadzenValueAxis>
-                    </RadzenChart>
+        <Tabs>
+            <RadzenTabsItem Text="Średnia">
+                <div class="row">
+                    <div class="col-sm-12 my-5">
+                        <RadzenCard Class="rz-background-color-success-lighter rz-shadow-10 rz-my-6 rz-mx-auto" Style="max-width: 420px">
+                            <RadzenText TextStyle="TextStyle.H6" class="text-center rz-mt-2 rz-my-0">Uśrednione dane</RadzenText>
+                            <RadzenRow RowGap="0">
+                                <RadzenColumn SizeSM="6">
+                                    <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0">Data</RadzenText>
+                                    <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.Date.ToString()</b></RadzenText>
+                                </RadzenColumn>
+                                <RadzenColumn SizeSM="6">
+                                    <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0">Temperatura</RadzenText>
+                                    <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.Temperature ℃</b></RadzenText>
+                                </RadzenColumn>
+                            </RadzenRow>
+                            <RadzenCard class="rz-background-color-success-lighter rz-shadow-5 rz-border-radius-0 rz-p-8" style="margin: 1rem calc(-1 * var(--rz-card-padding));">
+                                <RadzenText TextStyle="TextStyle.H6" class="text-center rz-color-on-primary-light"><strong>Szczegóły</strong></RadzenText>
+                                <RadzenRow RowGap="0">
+                                    <RadzenColumn SizeSM="6">
+                                        <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Prędkość wiatru</RadzenText>
+                                        <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.WindKph km/h</b></RadzenText>
+                                        <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Kierunek wiatru</RadzenText>
+                                        <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.WindDir</b></RadzenText>
+                                        <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Uv</RadzenText>
+                                        <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.Uv</b></RadzenText>
+                                    </RadzenColumn>
+                                    <RadzenColumn SizeSM="6">
+                                        <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Deszcz</RadzenText>
+                                        <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.TotalPrecip_in l/m²</b></RadzenText>
+                                        <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Ciśnienie</RadzenText>
+                                        <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.Pressure Pa</b></RadzenText>
+                                        <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Wilgotność</RadzenText>
+                                        <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.Humidity %</b></RadzenText>
+                                    </RadzenColumn>
+                                </RadzenRow>
+                            </RadzenCard>
+                        </RadzenCard>
+                    </div>
                 </div>
-            </div>
-        </RadzenTabsItem>
-    </Tabs>
-</RadzenTabs> 
+            </RadzenTabsItem>
+            <RadzenTabsItem Text="Dane z dnia">
+                <div class="row rz-shadow-10">
+                    <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" GridLines="DataGridGridLines.Horizontal" FilterMode="FilterMode.Advanced" 
+                            AllowPaging="true" AllowSorting="true" Data="@oneDayData" TItem="OneDayDataVm"
+                            ColumnWidth="140px" LogicalFilterOperator="LogicalFilterOperator.Or" Style="height:500px">
+                        <Columns>
+                            <RadzenDataGridColumn TItem="OneDayDataVm" Property="Date" Filterable="false" Title="Godzina" Frozen="true" Width="100px" FormatString="{0:t}"/>
+                            <RadzenDataGridColumn TItem="OneDayDataVm" Property="Temperature" Filterable="false"  Title="Temperatura" Frozen="true" FormatString="{0}℃" />
+                            <RadzenDataGridColumn TItem="OneDayDataVm" Property="Humidity" Filterable="false" Title="Wilgotność" Frozen="true" Width="150px" FormatString="{0}%" />
+                            <RadzenDataGridColumn TItem="OneDayDataVm" Property="WindKph" Filterable="false" Title="Prędkość wiatru" Frozen="true" FormatString="{0}km/h" />
+                            <RadzenDataGridColumn TItem="OneDayDataVm" Property="WindDir" Filterable="false" Title="Kierunek wiatru" Frozen="true" />
+                            <RadzenDataGridColumn TItem="OneDayDataVm" Property="Pressure" Filterable="false" Title="Ciśnienie" Frozen="true" FormatString="{0}Pa" />
+                            <RadzenDataGridColumn TItem="OneDayDataVm" Property="TotalPrecip_in" Filterable="false" Title="Opad deszczu" Frozen="true" FormatString="{0}l/m²" />
+                            <RadzenDataGridColumn TItem="OneDayDataVm" Property="Uv" Filterable="false" Title="Uv" Frozen="true" Width="80px" />
+                        </Columns>
+                    </RadzenDataGrid>
+                </div>
+            </RadzenTabsItem>
+            <RadzenTabsItem Text="Wykres">
+                    <RadzenDropDown class="rz-shadow-3" Data="@(Enum.GetValues(typeof(CategoryData)).Cast<Enum>())" @bind-Value=@categoryData onchange="@OnSomethingChanged(null)"
+                        AllowClear="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" Style="width: 100%; max-width: 400px;">
+                </RadzenDropDown>
+                <div class="row">
+                    <div class="rz-shadow-7 col-sm-12 my-5">
+                        <RadzenCard class="w-100 mb-4" Style="display: flex; align-items: center; gap: 0.5rem">
+                            <RadzenCheckBox @bind-Value="@showDataLabels" Name="dataLabels"></RadzenCheckBox>
+                            <RadzenLabel Text="Wartości" For="dataLabels" />
+                        </RadzenCard>
+                        <RadzenChart>
+                                <RadzenLineSeries Smooth="true" Data="@oneDayData" CategoryProperty="Date" Title="@categoryData.GetDisplayDescription()" LineType="LineType.Dashed" ValueProperty="@categoryData.ToString()">
+                                <RadzenMarkers MarkerType="MarkerType.Circle" />
+                                <RadzenSeriesDataLabels Visible="@showDataLabels" />
+                            </RadzenLineSeries>
+                            <RadzenCategoryAxis Padding="20" Formatter="@FormatAsHour"> 
+                                <RadzenAxisTitle Text="Godzina" />   
+                            </RadzenCategoryAxis>                  
+                            <RadzenValueAxis Formatter="@FormatAsString">
+                                <RadzenGridLines Visible="true" />             
+                            </RadzenValueAxis>
+                        </RadzenChart>
+                    </div>
+                </div>
+            </RadzenTabsItem>
+        </Tabs>
+    </RadzenTabs> 
 </div>
 }
 
@@ -153,6 +150,5 @@ else
         oneDayData = oneDayData.ToList();
         return sender;
     }
-
 
 }
