@@ -9,7 +9,7 @@ namespace Vetero.Infrastructure.ExternalApi.Rapid
         {
             var urlBuilder = new StringBuilder();
             var days = query.Days != null ? $"&days={query.Days}" : "";
-            var lang = query.Lang != null ? $"&lang={query.Lang}" : "";
+            var lang = query.Lang != null ? $"&lang={query.Lang}" : "&lang=PL";
             var date = query.Date != null ? $"&dt={query.Date}" : "";
 
             urlBuilder.Append(!string.IsNullOrEmpty(_baseUrl) ? _baseUrl : "").Append($"forecast.json?q={query.Location}")

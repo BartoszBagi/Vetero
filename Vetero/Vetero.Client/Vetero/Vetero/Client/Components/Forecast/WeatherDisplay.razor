@@ -1,0 +1,30 @@
+﻿@using Vetero.Shared.ViewModels.Rapid.ForecastItems;
+
+<h1 class="text-center exotic">Dane pogodowe</h1>
+<div class="row mb-12">
+    <RadzenTabs TabPosition="TabPosition.Top" RenderMode="TabRenderMode.Client">
+        <Tabs>
+            <RadzenTabsItem Text="Aktualna">
+                <CurrentAvg forecast="forecast" avgCurrent="avgCurrent"/>
+            </RadzenTabsItem>
+            <RadzenTabsItem Text="Prognoza">
+                <Forecast forecastDay="forecastDay"/>
+            </RadzenTabsItem>
+            <RadzenTabsItem Text="Lista">
+               
+            </RadzenTabsItem>
+            <RadzenTabsItem Text="Wykres">
+
+            </RadzenTabsItem>
+        </Tabs>
+    </RadzenTabs>
+
+        
+</div>
+@code {
+    [Parameter] public ForecastWeather forecast { get; set; }
+    [Parameter] public IEnumerable<Forecastday> forecastDay { get; set; }
+    [Parameter] public Forecastday avgCurrent { get; set; }
+
+
+}

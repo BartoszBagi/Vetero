@@ -1,0 +1,50 @@
+﻿@using Vetero.Shared.ViewModels.Rapid.ForecastItems;
+
+<div class="row">
+    <div class="col-sm-12 my-5">      
+        <RadzenCard Class="rz-background-color-success-lighter rz-shadow-10 rz-my-6 rz-mx-auto" Style="max-width: 420px">
+            <RadzenText TextStyle="TextStyle.H6" class="text-center rz-mt-2 rz-my-0">Aktualna pogoda dla @forecast.location.name</RadzenText>
+            <RadzenImage Path="@avgCurrent.day.condition.icon" />
+            <RadzenRow RowGap="0">
+                <RadzenColumn SizeSM="6">
+                    <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0">Temperatura</RadzenText>
+                    <RadzenText TextStyle="TextStyle.Body1"><b>@avgCurrent.day.avgtemp_c ℃</b></RadzenText>
+                </RadzenColumn>
+                <RadzenColumn SizeSM="6">
+                    <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0">Odczuwalna</RadzenText>
+                    <RadzenText TextStyle="TextStyle.Body1"><b>@forecast.current.feelslike_c" ℃</b></RadzenText>
+                </RadzenColumn>
+            </RadzenRow>
+            <RadzenCard class="rz-background-color-success-lighter rz-shadow-5 rz-border-radius-0 rz-p-8" style="margin: 1rem calc(-1 * var(--rz-card-padding));">
+                <RadzenText TextStyle="TextStyle.H6" class="text-center rz-color-on-primary-light"><strong>@avgCurrent.day.condition.text</strong></RadzenText>
+                <RadzenRow RowGap="0">
+                    <RadzenColumn SizeSM="6">
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Temp. Min</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Body1"><b>@avgCurrent.day.mintemp_c ℃</b></RadzenText>                       
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Prędkość wiatru</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Body1"><b>@avgCurrent.day.avgvis_km km/h</b></RadzenText>
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Uv</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Body1"><b>@avgCurrent.day.uv</b></RadzenText>
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Ciśnienie</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Body1"><b>@forecast.current.pressure_mb Pa</b></RadzenText>
+                    </RadzenColumn>
+                    <RadzenColumn SizeSM="6">
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Temp. Max</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Body1"><b>@avgCurrent.day.maxtemp_c ℃</b></RadzenText>
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Kierunek wiatru</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Body1"><b>@forecast.current.wind_dir</b></RadzenText>
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Wilgotność</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Body1"><b>@avgCurrent.day.avghumidity %</b></RadzenText>
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Opad</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Body1"><b>@forecast.current.precip_in </b></RadzenText>
+                    </RadzenColumn>
+                </RadzenRow>
+            </RadzenCard>
+        </RadzenCard>
+    </div>
+</div>
+
+@code {
+    [Parameter] public ForecastWeather forecast { get; set; }
+    [Parameter] public Forecastday avgCurrent { get; set; }
+}

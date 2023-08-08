@@ -1,0 +1,29 @@
+﻿@using Vetero.Shared.ViewModels.Rapid.ForecastItems;
+<div class="row rz-shadow-10">
+    <RadzenPanel AllowCollapse="true" Class="rz-my-10 rz-mx-auto" Style="width: 400px;">
+        <HeaderTemplate>
+            <RadzenText TextStyle="TextStyle.H6" Class="rz-display-flex rz-align-items-center rz-m-0">
+                <RadzenIcon Icon="list" class="rz-mr-1" /><b>Prognoza</b>
+            </RadzenText>
+        </HeaderTemplate>
+        <ChildContent>
+            <RadzenDataList PageSize="1" AllowPaging="true"
+                            Data="@forecastDay" TItem="Forecastday">
+                <Template Context="forecastDay">
+                    <WeatherCard DateTime="@forecastDay.date"
+                                 WeatherDescription="@forecastDay.day.condition.text"
+                                 Temperature="@forecastDay.day.avgtemp_c"
+                                 TemperatureFeelsLike="@forecastDay.hour.Where(x => x.temp_c == @forecastDay.hour.Max(x => x.temp_c)).FirstOrDefault().feelslike_c"
+                                 TemperatureMax="@forecastDay.day.maxtemp_c"
+                                 TemperatureMin="@forecastDay.day.mintemp_c"
+                                 Humidity="@forecastDay.day.avghumidity"
+                                 WindSpeed="@forecastDay.day.avgvis_km" />
+                </Template>
+            </RadzenDataList>
+        </ChildContent>
+    </RadzenPanel>
+</div>
+
+@code {
+    [Parameter] public IEnumerable<Forecastday> forecastDay { get; set; }
+}

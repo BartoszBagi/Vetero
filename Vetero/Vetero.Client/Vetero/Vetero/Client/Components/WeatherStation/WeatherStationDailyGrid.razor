@@ -1,0 +1,22 @@
+﻿@using Vetero.Shared.ViewModels.WeatherStations;
+
+<div class="row rz-shadow-10">
+    <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" GridLines="DataGridGridLines.Horizontal" FilterMode="FilterMode.Advanced"
+                    AllowPaging="true" AllowSorting="true" Data="@oneDayData" TItem="OneDayDataVm"
+                    ColumnWidth="140px" LogicalFilterOperator="LogicalFilterOperator.Or" Style="height:500px">
+        <Columns>
+            <RadzenDataGridColumn TItem="OneDayDataVm" Property="Date" Filterable="false" Title="Godzina" Frozen="true" Width="100px" FormatString="{0:t}" />
+            <RadzenDataGridColumn TItem="OneDayDataVm" Property="Temperature" Filterable="false" Title="Temperatura" Frozen="true" FormatString="{0}℃" />
+            <RadzenDataGridColumn TItem="OneDayDataVm" Property="Humidity" Filterable="false" Title="Wilgotność" Frozen="true" Width="150px" FormatString="{0}%" />
+            <RadzenDataGridColumn TItem="OneDayDataVm" Property="WindKph" Filterable="false" Title="Prędkość wiatru" Frozen="true" FormatString="{0}km/h" />
+            <RadzenDataGridColumn TItem="OneDayDataVm" Property="WindDir" Filterable="false" Title="Kierunek wiatru" Frozen="true" />
+            <RadzenDataGridColumn TItem="OneDayDataVm" Property="Pressure" Filterable="false" Title="Ciśnienie" Frozen="true" FormatString="{0}Pa" />
+            <RadzenDataGridColumn TItem="OneDayDataVm" Property="TotalPrecip_in" Filterable="false" Title="Opad deszczu" Frozen="true" FormatString="{0}l/m²" />
+            <RadzenDataGridColumn TItem="OneDayDataVm" Property="Uv" Filterable="false" Title="Uv" Frozen="true" Width="80px" />
+        </Columns>
+    </RadzenDataGrid>
+</div>
+
+@code {
+    [Parameter] public IEnumerable<OneDayDataVm> oneDayData { get; set; }
+}
