@@ -2,15 +2,15 @@
 
 namespace Vetero.Shared.Enums
 {
-    public enum CategoryData
+    public enum ForecastCategoryData
     {
         [Display(Description = "Temperatura °C")]
-        Temperature,
+        temp_c,
         [Display(Description = "Wilgotność %")]
-        Humidity,     
+        humidity,     
         [Display(Description = "Prędkość wiatru km/h")]
-        WindKph,
+        wind_kph,
         [Display(Description = "Opad deszczu")]
-        TotalPrecip_mm
+        precip_in
     }
 }

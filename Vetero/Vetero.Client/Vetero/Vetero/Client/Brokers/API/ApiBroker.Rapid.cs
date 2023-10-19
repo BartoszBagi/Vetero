@@ -1,4 +1,5 @@
-﻿using Vetero.Shared.ViewModels.Rapid.ForecastItems;
+﻿using Vetero.Shared.Commands.Rapid;
+using Vetero.Shared.ViewModels.Rapid.ForecastItems;
 using Vetero.Shared.ViewModels.Rapid.RealTime;
 
 namespace Vetero.Client.Brokers.API
@@ -11,6 +12,9 @@ namespace Vetero.Client.Brokers.API
 
         public async Task<ForecastWeather> GetForecastWeatherAsync(string location, string? date = null, int? days = null, string? lang = null) =>
             await this.GetAsync<ForecastWeather>($"{RapidRelativeUrl}/forecast-weather/{location}?date={date}&days={days}&lang={lang}");
+
+        public async Task SaveWeatherTestData(WeatherTestDataDto dto) =>
+            await this.PostAsync($"{RapidRelativeUrl}/weather-test-data", dto);
     }
 }
 

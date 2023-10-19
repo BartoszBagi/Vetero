@@ -1,0 +1,69 @@
+﻿@using Vetero.Shared.Enums;
+@using Vetero.Shared.ViewModels.Rapid.ForecastItems;
+@using Vetero.Shared.ViewModels.WeatherStations;
+
+<div class="rz-p-12 rz-text-align-center">
+    <RadzenDatePicker class="rz-shadow-3" @bind-Value=@dateParameter Change="@(() => GetSpecifiedDayDetails())" />
+</div>
+
+<RadzenDropDown class="rz-shadow-3" Data="@(Enum.GetValues(typeof(CategoryData)).Cast<Enum>())" @bind-Value=@categoryData onchange="@OnSomethingChanged(null)"
+                AllowClear="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" Style="width: 100%; max-width: 400px;">
+</RadzenDropDown>
+<div class="rz-shadow-7 col-sm-12 my-5">
+    <RadzenCard class="w-100 mb-4" Style="display: flex; align-items: center; gap: 0.5rem">
+        <RadzenCheckBox @bind-Value="@showDataLabels" Name="dataLabels"></RadzenCheckBox>
+        <RadzenLabel Text="Wartości" For="dataLabels" />
+    </RadzenCard>
+    <RadzenChart>
+        <RadzenLineSeries Smooth="true" Data="@forecastDayHours" CategoryProperty="time" Title="@categoryData.GetDisplayDescription()" LineType="LineType.Dashed" ValueProperty="@categoryData.ToString()">
+            <RadzenMarkers MarkerType="MarkerType.Circle" />
+            <RadzenSeriesDataLabels Visible="@showDataLabels" />
+        </RadzenLineSeries>
+        <RadzenCategoryAxis Padding="20" Formatter="@FormatAsHour">
+            <RadzenAxisTitle Text="Godzina" />
+        </RadzenCategoryAxis>
+        <RadzenValueAxis Formatter="@FormatAsString">
+            <RadzenGridLines Visible="true" />
+        </RadzenValueAxis>
+    </RadzenChart>
+</div>
+
+@code {
+    [Parameter] public ForecastWeather forecast { get; set; }
+
+    private List<Hour> forecastDayHours { get; set; }
+    private DateTime dateParameter = DateTime.Now;
+    ForecastCategoryData categoryData;
+    bool showDataLabels = false;
+
+    protected override void OnInitialized()
+    {
+        forecastDayHours = forecast.forecast.forecastday.FirstOrDefault().hour;
+    }
+
+    private void GetSpecifiedDayDetails()
+    {
+        var testparam = dateParameter.ToString("yyyy-MM-dd");
+        var forecastDay = forecast.forecast.forecastday.Where(d => d.date == dateParameter.ToString("yyyy-MM-dd")).FirstOrDefault();
+        if (forecastDay != null)
+            forecastDayHours = forecastDay.hour;
+    }
+
+    private object OnSomethingChanged(object? sender)
+    {
+        forecastDayHours = forecastDayHours.ToList();
+        return sender;
+    }
+    string FormatAsHour(object value)
+    {
+        if (value != null)
+        {
+            return Convert.ToDateTime(value).ToString("HH:mm");
+        }
+        return string.Empty;
+    }
+    string FormatAsString(object value)
+    {
+        return ((double)value).ToString();
+    }
+}

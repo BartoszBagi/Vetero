@@ -1,0 +1,49 @@
+﻿@using Vetero.Shared.ViewModels.Rapid.ForecastItems;
+
+<div class="rz-p-12 rz-text-align-center">
+    <RadzenDatePicker class="rz-shadow-3" @bind-Value=@dateParameter Change="@(() => GetSpecifiedDayDetails())" />
+</div>
+
+<div class="row rz-shadow-10">
+    <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" GridLines="DataGridGridLines.Horizontal" FilterMode="FilterMode.Advanced"
+                    AllowPaging="true" AllowSorting="true" Data="@forecastDay.hour" TItem="Hour"
+                    ColumnWidth="140px" LogicalFilterOperator="LogicalFilterOperator.Or" Style="height:500px">         
+        <Columns>
+            <RadzenDataGridColumn TItem="Hour" Property="timeToDisplay" Filterable="false" Title="Godzina" Frozen="true" Width="100px" FormatString="{0:hh:mm:ss tt}" />
+            <RadzenDataGridColumn TItem="Hour" Property="temp_c" Filterable="false" Title="Temperatura" Frozen="true" FormatString="{0}℃" />
+            <RadzenDataGridColumn TItem="Hour" Property="humidity" Filterable="false" Title="Wilgotność" Frozen="true" Width="150px" FormatString="{0}%" />
+            <RadzenDataGridColumn TItem="Hour" Property="wind_kph" Filterable="false" Title="Prędkość wiatru" Frozen="true" FormatString="{0}km/h" />
+            <RadzenDataGridColumn TItem="Hour" Property="wind_dir" Filterable="false" Title="Kierunek wiatru" Frozen="true" />
+            <RadzenDataGridColumn TItem="Hour" Property="pressure_in" Filterable="false" Title="Ciśnienie" Frozen="true" FormatString="{0}Pa" />
+            <RadzenDataGridColumn TItem="Hour" Property="precip_in" Filterable="false" Title="Opad deszczu" Frozen="true" FormatString="{0}l/m²" />
+            <RadzenDataGridColumn TItem="Hour" Property="uv" Filterable="false" Title="Uv" Frozen="true" Width="80px" />
+        </Columns>
+    </RadzenDataGrid>
+</div>
+
+@code {
+    [Parameter] public List<Forecastday> forecast { get; set; }
+    private Forecastday forecastDay { get; set; }
+    private DateTime dateParameter = DateTime.Now;
+
+    protected override void OnInitialized()
+    {
+        forecastDay = forecast.FirstOrDefault();
+    }
+
+    private void GetSpecifiedDayDetails()
+    {
+        var testparam = dateParameter.ToString("yyyy-MM-dd");
+        var specifiedDay = forecast.Where(d => d.date == dateParameter.ToString("yyyy-MM-dd")).FirstOrDefault();
+        if (specifiedDay != null)
+            forecastDay = specifiedDay;
+
+        OnAfterRenderAsync(false);
+    }
+
+    private object OnSomethingChanged(object? sender)
+    {
+        GetSpecifiedDayDetails();
+        return sender;
+    }
+}

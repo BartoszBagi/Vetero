@@ -37,5 +37,18 @@ namespace Vetero.Shared.ViewModels.Rapid.ForecastItems
         public double gust_mph { get; set; }
         public double gust_kph { get; set; }
         public double uv { get; set; }
+        private string _onlyTime { get; set; }
+        public string timeToDisplay
+        {
+            get { return _onlyTime; }
+            set
+            {
+                // Set B to some new value
+                _onlyTime = value;
+
+                // Assign C
+                _onlyTime = Convert.ToDateTime(time).ToString("HH:mm");
+            }
+        }
     }
 }

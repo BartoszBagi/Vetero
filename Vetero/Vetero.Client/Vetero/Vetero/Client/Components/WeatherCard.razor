@@ -1,8 +1,14 @@
-﻿<div class="rz-background-color-success-lighter card text-center h-100">
+﻿@using Vetero.Shared.Commands.Rapid;
+@inject IJSRuntime JsRuntime
+@inject IApiBroker broker
+
+<div class="rz-background-color-success-lighter card text-center h-100" onclick="">
     @if (!string.IsNullOrWhiteSpace(DateTime))
     {
         <div class="card-header">
             @DateTime
+            <br/>
+            <RadzenImage Path="@WeatherIcon" />
         </div>
     }
     <div class="card-body">
@@ -24,6 +30,9 @@
         <p class="small">
             Wiatr @WindSpeed m/s
         </p>
+        <p class="small">
+            Deszcz @WindSpeed m/s
+        </p>
     </div>
 </div>
 
@@ -36,4 +45,22 @@
     [Parameter] public double TemperatureMin { get; set; }
     [Parameter] public double Humidity { get; set; }
     [Parameter] public double WindSpeed { get; set; }
+    [Parameter] public double TotalPrecip_mm { get; set; }
+    [Parameter] public string WeatherIcon { get; set; }
+
+    private async Task SaveWeatherTestData()
+    {
+        bool confirmed = await JsRuntime.InvokeAsync<bool>("confirm", "Jesteś pewien?");
+        if (confirmed)
+        {
+            await broker.SaveWeatherTestData(new WeatherTestDataDto()
+            {
+                Date = DateTime,
+                Humidity = Humidity,
+                Temperature = Temperature,
+                WindKph = WindSpeed,
+                TotalPrecip_mm = TotalPrecip_mm
+            });
+        }
+    }
 }

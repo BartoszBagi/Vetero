@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Vetero.Persistance;
 
@@ -11,9 +12,10 @@ using Vetero.Persistance;
 namespace Vetero.Persistance.Migrations
 {
     [DbContext(typeof(VeteroDbContext))]
-    partial class VeteroDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231015190857_Poprawka")]
+    partial class Poprawka
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
