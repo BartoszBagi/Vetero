@@ -1,8 +1,83 @@
 ﻿@page "/statistics"
+@using Vetero.Client.Components.Statistics
+@using Vetero.Shared.Helpers;
+@using Vetero.Shared.ViewModels.Rapid.TestedData;
 
+@inject IApiBroker broker;
+@inject HttpClient client
+@inject NavigationManager _navigationManager
 
 <h1 class="text-center exotic">Statystyki</h1>
-
+<div class="container">
+    @if (dates.Count() == 0)
+    {
+        <p>Loading....</p>
+    }
+    else
+    {
+        <div class="rz-p-sm-12 rz-text-align-center">
+            <RadzenDropDown TValue="string" Value=@dateToTest Data=@dates Change="@(args => dateToTest = $"{args}")" Style="width: 100%; max-width: 400px;" onchange="@GetTestedDataAsync()"/>
+        </div>
+        @if (comparedData == null)
+        {
+            <p class="text-center">Brak danych</p>
+        }
+        else
+        {
+            <div class="row text-center">
+                <div class="col-4" style="display:inline-block">
+                    <p>Dane ze stacji</p>
+                    <TestDataViewCard DateTime="@dateToTest"
+                              Humidity="comparedData.StationCompareData.Humidity"
+                              Temperature="comparedData.StationCompareData.Temperature"
+                              WindSpeed="comparedData.StationCompareData.WindKph"
+                              TotalPrecip_mm="comparedData.StationCompareData.TotalPrecip_mm"/>
+                </div>
+                <div class="col-4" style="display:inline-block">
+                    <p></p>
+                    <br>
+                    <ResultsViewCard 
+                             Humidity="comparedData.CompareResults.Humidity"
+                             Temperature="comparedData.CompareResults.Temperature"
+                             WindSpeed="comparedData.CompareResults.WindKph"
+                             TotalPrecip_mm="comparedData.CompareResults.TotalPrecip_mm" />
+                </div>
+                <div class="col-4" style="display:inline-block">
+                    <p>Dane z prognozy</p>
+                    <TestDataViewCard DateTime="@dateToTest"
+                              Humidity="comparedData.WeatherTestData.Humidity"
+                              Temperature="comparedData.WeatherTestData.Temperature"
+                              WindSpeed="comparedData.WeatherTestData.WindKph"
+                              TotalPrecip_mm="comparedData.WeatherTestData.TotalPrecip_mm" />
+                </div>
+            </div>
+        }
+    }
+</div>
 @code {
+    private IEnumerable<string> dates = new List<string>();
+    string dateToTest = "Wybierz datę";
+    private TestedDataModel? comparedData;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        dates = (await broker.GetTestedDatesAsync()).Select(x => x.ToString("yyyy-MM-dd")).ToList();
+    } 
+
+    private async Task GetTestedDataAsync()
+    {
+        DateTime dateToCompare;
+        var isCorrectDate = DateTime.TryParse(dateToTest, out dateToCompare);
+        var isDateNewValue = comparedData == null ? true : dateToCompare.Date != comparedData.WeatherTestData.Date.Date;
+        if (isCorrectDate && isDateNewValue)
+        {
+            comparedData = await broker.GetTestedDataAsync(dateToCompare.ToString("yyyy-MM-dd"));
+            if (comparedData.WeatherTestData.Date.Date.ToString() == "01.01.0001 00:00:00")
+                comparedData.WeatherTestData.Date = dateToCompare;
+            StateHasChanged();
+        }
+    }
+
 
 }

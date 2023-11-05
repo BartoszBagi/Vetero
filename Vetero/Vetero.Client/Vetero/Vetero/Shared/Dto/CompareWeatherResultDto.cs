@@ -1,9 +1,7 @@
-﻿namespace Vetero.Domain.Entities.Rapid
+﻿namespace Vetero.Shared.Dto
 {
-    public class WeatherTestData
+    public class CompareWeatherResultDto
     {
-        public int Id { get; set; }
-        public DateTime Date { get; set; }
         public double Temperature { get; set; }
         public double Humidity { get; set; }
         public double WindKph { get; set; }

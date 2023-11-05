@@ -25,6 +25,9 @@ else
     </div>
     <RadzenTabs TabPosition="TabPosition.Top" RenderMode="TabRenderMode.Client" >
         <Tabs>
+            <RadzenTabsItem Text="Aktualna">
+                <WeatherStationCurrent avgData="avgData" />
+            </RadzenTabsItem>
             <RadzenTabsItem Text="Średnia">
                 <WeatherStationAvgCurrent avgData="avgData"/>
             </RadzenTabsItem>
@@ -40,7 +43,7 @@ else
 }
 
 @code {
-    private DateTime dateParameter = DateTime.Now;
+    private DateTime dateParameter;
     private IEnumerable<OneDayDataVm> oneDayData;
     private AvgDayDataVm avgData;
 

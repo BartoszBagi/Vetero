@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Vetero.Persistance;
 
@@ -11,9 +12,10 @@ using Vetero.Persistance;
 namespace Vetero.Persistance.Migrations
 {
     [DbContext(typeof(VeteroDbContext))]
-    partial class VeteroDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231019165435_DeletePressureFromModel")]
+    partial class DeletePressureFromModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,10 +33,14 @@ namespace Vetero.Persistance.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Date")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Humidity")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Pressure")
                         .HasColumnType("float");
 
                     b.Property<double>("Temperature")
@@ -101,7 +107,7 @@ namespace Vetero.Persistance.Migrations
                         new
                         {
                             Id = 1,
-                            Date = new DateTime(2023, 10, 20, 4, 20, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 19, 4, 20, 0, 0, DateTimeKind.Unspecified),
                             Humidity = 50.0,
                             Pressure = 1006.0,
                             Sunrise = 6.2999999999999998,
@@ -116,7 +122,7 @@ namespace Vetero.Persistance.Migrations
                         new
                         {
                             Id = 2,
-                            Date = new DateTime(2023, 10, 20, 4, 45, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 19, 4, 45, 0, 0, DateTimeKind.Unspecified),
                             Humidity = 50.0,
                             Pressure = 1006.0,
                             Sunrise = 6.2999999999999998,
@@ -131,7 +137,7 @@ namespace Vetero.Persistance.Migrations
                         new
                         {
                             Id = 3,
-                            Date = new DateTime(2023, 10, 20, 5, 30, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 19, 5, 30, 0, 0, DateTimeKind.Unspecified),
                             Humidity = 50.0,
                             Pressure = 1006.0,
                             Sunrise = 6.2999999999999998,
@@ -146,7 +152,7 @@ namespace Vetero.Persistance.Migrations
                         new
                         {
                             Id = 4,
-                            Date = new DateTime(2023, 10, 20, 6, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 19, 6, 0, 0, 0, DateTimeKind.Unspecified),
                             Humidity = 50.0,
                             Pressure = 1006.0,
                             Sunrise = 6.2999999999999998,
@@ -161,7 +167,7 @@ namespace Vetero.Persistance.Migrations
                         new
                         {
                             Id = 5,
-                            Date = new DateTime(2023, 10, 20, 6, 45, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 19, 6, 45, 0, 0, DateTimeKind.Unspecified),
                             Humidity = 50.0,
                             Pressure = 1006.0,
                             Sunrise = 6.2999999999999998,
@@ -176,7 +182,7 @@ namespace Vetero.Persistance.Migrations
                         new
                         {
                             Id = 6,
-                            Date = new DateTime(2023, 10, 20, 7, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 19, 7, 0, 0, 0, DateTimeKind.Unspecified),
                             Humidity = 50.0,
                             Pressure = 1006.0,
                             Sunrise = 6.2999999999999998,
@@ -191,7 +197,7 @@ namespace Vetero.Persistance.Migrations
                         new
                         {
                             Id = 7,
-                            Date = new DateTime(2023, 10, 20, 7, 25, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 19, 7, 25, 0, 0, DateTimeKind.Unspecified),
                             Humidity = 45.0,
                             Pressure = 1006.0,
                             Sunrise = 6.2999999999999998,
@@ -206,7 +212,7 @@ namespace Vetero.Persistance.Migrations
                         new
                         {
                             Id = 8,
-                            Date = new DateTime(2023, 10, 20, 8, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 19, 8, 0, 0, 0, DateTimeKind.Unspecified),
                             Humidity = 45.0,
                             Pressure = 1006.0,
                             Sunrise = 6.2999999999999998,
@@ -221,7 +227,7 @@ namespace Vetero.Persistance.Migrations
                         new
                         {
                             Id = 9,
-                            Date = new DateTime(2023, 10, 20, 8, 20, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 19, 8, 20, 0, 0, DateTimeKind.Unspecified),
                             Humidity = 40.0,
                             Pressure = 1006.0,
                             Sunrise = 6.2999999999999998,
@@ -236,7 +242,7 @@ namespace Vetero.Persistance.Migrations
                         new
                         {
                             Id = 10,
-                            Date = new DateTime(2023, 10, 20, 8, 45, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 19, 8, 45, 0, 0, DateTimeKind.Unspecified),
                             Humidity = 50.0,
                             Pressure = 1006.0,
                             Sunrise = 6.2999999999999998,
@@ -251,7 +257,7 @@ namespace Vetero.Persistance.Migrations
                         new
                         {
                             Id = 11,
-                            Date = new DateTime(2023, 10, 20, 9, 20, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 19, 9, 20, 0, 0, DateTimeKind.Unspecified),
                             Humidity = 50.0,
                             Pressure = 1006.0,
                             Sunrise = 6.2999999999999998,
@@ -266,7 +272,7 @@ namespace Vetero.Persistance.Migrations
                         new
                         {
                             Id = 12,
-                            Date = new DateTime(2023, 10, 20, 9, 45, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 19, 9, 45, 0, 0, DateTimeKind.Unspecified),
                             Humidity = 50.0,
                             Pressure = 1006.0,
                             Sunrise = 6.2999999999999998,
@@ -281,7 +287,7 @@ namespace Vetero.Persistance.Migrations
                         new
                         {
                             Id = 13,
-                            Date = new DateTime(2023, 10, 20, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 19, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             Humidity = 50.0,
                             Pressure = 1006.0,
                             Sunrise = 6.2999999999999998,
@@ -296,7 +302,7 @@ namespace Vetero.Persistance.Migrations
                         new
                         {
                             Id = 14,
-                            Date = new DateTime(2023, 10, 20, 11, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 19, 11, 0, 0, 0, DateTimeKind.Unspecified),
                             Humidity = 50.0,
                             Pressure = 1006.0,
                             Sunrise = 6.2999999999999998,
@@ -311,7 +317,7 @@ namespace Vetero.Persistance.Migrations
                         new
                         {
                             Id = 15,
-                            Date = new DateTime(2023, 10, 20, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             Humidity = 50.0,
                             Pressure = 1006.0,
                             Sunrise = 6.2999999999999998,
@@ -326,7 +332,7 @@ namespace Vetero.Persistance.Migrations
                         new
                         {
                             Id = 16,
-                            Date = new DateTime(2023, 10, 20, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 19, 13, 0, 0, 0, DateTimeKind.Unspecified),
                             Humidity = 50.0,
                             Pressure = 1006.0,
                             Sunrise = 6.2999999999999998,
@@ -341,7 +347,7 @@ namespace Vetero.Persistance.Migrations
                         new
                         {
                             Id = 17,
-                            Date = new DateTime(2023, 10, 20, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 19, 14, 0, 0, 0, DateTimeKind.Unspecified),
                             Humidity = 50.0,
                             Pressure = 1006.0,
                             Sunrise = 6.2999999999999998,
@@ -356,7 +362,7 @@ namespace Vetero.Persistance.Migrations
                         new
                         {
                             Id = 18,
-                            Date = new DateTime(2023, 10, 20, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 19, 15, 0, 0, 0, DateTimeKind.Unspecified),
                             Humidity = 50.0,
                             Pressure = 1006.0,
                             Sunrise = 6.2999999999999998,
@@ -371,7 +377,7 @@ namespace Vetero.Persistance.Migrations
                         new
                         {
                             Id = 19,
-                            Date = new DateTime(2023, 10, 20, 16, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 19, 16, 0, 0, 0, DateTimeKind.Unspecified),
                             Humidity = 50.0,
                             Pressure = 1006.0,
                             Sunrise = 6.2999999999999998,
@@ -386,7 +392,7 @@ namespace Vetero.Persistance.Migrations
                         new
                         {
                             Id = 20,
-                            Date = new DateTime(2023, 10, 20, 17, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 19, 17, 0, 0, 0, DateTimeKind.Unspecified),
                             Humidity = 50.0,
                             Pressure = 1006.0,
                             Sunrise = 6.2999999999999998,
@@ -401,7 +407,7 @@ namespace Vetero.Persistance.Migrations
                         new
                         {
                             Id = 21,
-                            Date = new DateTime(2023, 10, 20, 18, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 19, 18, 0, 0, 0, DateTimeKind.Unspecified),
                             Humidity = 50.0,
                             Pressure = 1006.0,
                             Sunrise = 6.2999999999999998,
@@ -416,7 +422,7 @@ namespace Vetero.Persistance.Migrations
                         new
                         {
                             Id = 22,
-                            Date = new DateTime(2023, 10, 20, 19, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 19, 19, 0, 0, 0, DateTimeKind.Unspecified),
                             Humidity = 50.0,
                             Pressure = 1006.0,
                             Sunrise = 6.2999999999999998,
@@ -431,7 +437,7 @@ namespace Vetero.Persistance.Migrations
                         new
                         {
                             Id = 23,
-                            Date = new DateTime(2023, 10, 20, 20, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 19, 20, 0, 0, 0, DateTimeKind.Unspecified),
                             Humidity = 50.0,
                             Pressure = 1006.0,
                             Sunrise = 6.2999999999999998,
@@ -446,7 +452,7 @@ namespace Vetero.Persistance.Migrations
                         new
                         {
                             Id = 24,
-                            Date = new DateTime(2023, 10, 20, 21, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 19, 21, 0, 0, 0, DateTimeKind.Unspecified),
                             Humidity = 50.0,
                             Pressure = 1006.0,
                             Sunrise = 6.2999999999999998,
@@ -461,7 +467,7 @@ namespace Vetero.Persistance.Migrations
                         new
                         {
                             Id = 25,
-                            Date = new DateTime(2023, 10, 20, 22, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2023, 10, 19, 22, 0, 0, 0, DateTimeKind.Unspecified),
                             Humidity = 50.0,
                             Pressure = 1006.0,
                             Sunrise = 6.2999999999999998,

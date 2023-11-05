@@ -1,6 +1,7 @@
 ﻿using Vetero.Shared.Commands.Rapid;
 using Vetero.Shared.ViewModels.Rapid.ForecastItems;
 using Vetero.Shared.ViewModels.Rapid.RealTime;
+using Vetero.Shared.ViewModels.Rapid.TestedData;
 
 namespace Vetero.Client.Brokers.API
 {
@@ -8,6 +9,8 @@ namespace Vetero.Client.Brokers.API
     {
         Task<ForecastWeather> GetForecastWeatherAsync(string location, string? date = null, int? days = null, string? lang = null);
         Task<RealTimeWeather> GetRealTimeWeatherAsync(string location);
-        Task SaveWeatherTestData(WeatherTestDataDto dto);
+        Task SaveWeatherTestDataAsync(WeatherTestDataDto dto);
+        Task<List<DateTime>> GetTestedDatesAsync();
+        Task<TestedDataModel> GetTestedDataAsync(string dateToCompare);
     }
 }

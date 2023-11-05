@@ -1,40 +1,38 @@
 ﻿@using Vetero.Shared.ViewModels.WeatherStations;
 @inject NavigationManager _navigator;
 
-<RadzenCard Class="rz-background-color-success-lighter rz-shadow-10 rz-my-12 rz-mx-auto" Style="max-width: 420px">
-    <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Start" Gap="1rem" Class="rz-p-4">
-        <RadzenImage Path="@weatherImagePath" Style="width: 150px; height: 150px; border-radius: 50%;"></RadzenImage>
-        <RadzenStack Gap="0">
-            <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-2 rz-my-0">Data</RadzenText>
-            <RadzenText TextStyle="TextStyle.Body1"><b>@(currentData.Date)</b></RadzenText>
-            <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0">Temperatura</RadzenText>
-            <RadzenText TextStyle="TextStyle.Body1"><b>@currentData.Temperature ℃</b></RadzenText>
+@if(currentData == null || string.IsNullOrEmpty(weatherImagePath))
+{
+    <p>Loading...</p>
+}
+else
+{
+    <RadzenCard Class="rz-background-color-success-lighter rz-shadow-10 rz-my-12 rz-mx-auto" Style="max-width: 420px">
+        <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Start" Gap="1rem" Class="rz-p-4">
+            <RadzenImage Path="@weatherImagePath" Style="width: 150px; height: 150px; border-radius: 50%;"></RadzenImage>
+            <RadzenStack Gap="0">
+                <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-2 rz-my-0">Data</RadzenText>
+                <RadzenText TextStyle="TextStyle.Body1"><b>@(currentData.Date)</b></RadzenText>
+                <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0">Temperatura</RadzenText>
+                <RadzenText TextStyle="TextStyle.Body1"><b>@currentData.Temperature ℃</b></RadzenText>
+            </RadzenStack>
         </RadzenStack>
-    </RadzenStack>
-    <RadzenCard class="rz-background-color-success-lighter rz-shadow-5 rz-border-radius-0 rz-p-8" style="margin: 1rem calc(-1 * var(--rz-card-padding));">
-        <RadzenText TextStyle="TextStyle.H6" class="text-center rz-color-on-primary-light"><strong>@currentData.WeatherDescription</strong></RadzenText>
-        <RadzenRow RowGap="0">
-            <RadzenColumn SizeSM="6">
-                <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Wiatr</RadzenText>
-                <RadzenText TextStyle="TextStyle.Body1"><b>@currentData.WindKph km/h</b></RadzenText>
-            </RadzenColumn>
-            <RadzenColumn SizeSM="6">
-                <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Deszcz</RadzenText>
-                <RadzenText TextStyle="TextStyle.Body1"><b>@currentData.TotalPrecip_in l/m2</b></RadzenText>
-            </RadzenColumn>
-        </RadzenRow>
+        <RadzenCard class="rz-background-color-success-lighter rz-shadow-5 rz-border-radius-0 rz-p-8" style="margin: 1rem calc(-1 * var(--rz-card-padding));">
+            <RadzenText TextStyle="TextStyle.H6" class="text-center rz-color-on-primary-light"><strong>@currentData.WeatherDescription</strong></RadzenText>
+            <RadzenRow RowGap="0">
+                <RadzenColumn SizeSM="6">
+                    <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Wiatr</RadzenText>
+                    <RadzenText TextStyle="TextStyle.Body1"><b>@currentData.WindKph km/h</b></RadzenText>
+                </RadzenColumn>
+                <RadzenColumn SizeSM="6">
+                    <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Deszcz</RadzenText>
+                    <RadzenText TextStyle="TextStyle.Body1"><b>@currentData.TotalPrecip_in l/m2</b></RadzenText>
+                </RadzenColumn>
+            </RadzenRow>
+        </RadzenCard>
     </RadzenCard>
-    <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.End" Gap="0">
-        <RadzenButton Variant="Variant.Text" Text="Szczegóły" Click="@DetailsButton" />
-    </RadzenStack>
-</RadzenCard>
-
+}
 @code {
     [Parameter] public string weatherImagePath { get; set; }
     [Parameter] public CurrentDataVm currentData { get; set; }
-
-    private void DetailsButton()
-    {
-        _navigator.NavigateTo("/weather-station/details");
-    }
 }

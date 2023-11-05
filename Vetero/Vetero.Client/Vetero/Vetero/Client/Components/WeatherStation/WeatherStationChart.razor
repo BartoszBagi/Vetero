@@ -1,33 +1,54 @@
 ﻿@using Vetero.Shared.Enums;
 @using Vetero.Shared.ViewModels.WeatherStations;
+@inject IApiBroker broker;
 
-<RadzenDropDown class="rz-shadow-3" Data="@(Enum.GetValues(typeof(CategoryData)).Cast<Enum>())" @bind-Value=@categoryData onchange="@OnSomethingChanged(null)"
-                AllowClear="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" Style="width: 100%; max-width: 400px;">
-</RadzenDropDown>
-<div class="rz-shadow-7 col-sm-12 my-5">
-    <RadzenCard class="w-100 mb-4" Style="display: flex; align-items: center; gap: 0.5rem">
-        <RadzenCheckBox @bind-Value="@showDataLabels" Name="dataLabels"></RadzenCheckBox>
-        <RadzenLabel Text="Wartości" For="dataLabels" />
-    </RadzenCard>
-    <RadzenChart>
-        <RadzenLineSeries Smooth="true" Data="@oneDayData" CategoryProperty="Date" Title="@categoryData.GetDisplayDescription()" LineType="LineType.Dashed" ValueProperty="@categoryData.ToString()">
-            <RadzenMarkers MarkerType="MarkerType.Circle" />
-            <RadzenSeriesDataLabels Visible="@showDataLabels" />
-        </RadzenLineSeries>
-        <RadzenCategoryAxis Padding="20" Formatter="@FormatAsHour">
-            <RadzenAxisTitle Text="Godzina" />
-        </RadzenCategoryAxis>
-        <RadzenValueAxis Formatter="@FormatAsString">
-            <RadzenGridLines Visible="true" />
-        </RadzenValueAxis>
-    </RadzenChart>
-</div>
 
+@if (oneDayData == null)
+{
+    <div class="rz-p-12 rz-text-align-center">
+        <RadzenDatePicker class="rz-shadow-3" @bind-Value=@dateParameter DateFormat="dd-MM-yyyy" Change="@(() => GetSpecifiedDayDetails())" />
+    </div>
+}
+else
+{
+    <div class="rz-p-12 rz-text-align-center">
+        <RadzenDatePicker class="rz-shadow-3" @bind-Value=@dateParameter DateFormat="dd-MM-yyyy" Change="@(() => GetSpecifiedDayDetails())"/>
+    </div>
+    <RadzenDropDown class="rz-shadow-3" Data="@(Enum.GetValues(typeof(CategoryData)).Cast<Enum>())" @bind-Value=@categoryData onchange="@OnSomethingChanged(null)"
+                    AllowClear="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" Style="width: 100%; max-width: 400px;">
+    </RadzenDropDown>
+    <div class="rz-shadow-7 col-sm-12 my-5">
+        <RadzenCard class="w-100 mb-4" Style="display: flex; align-items: center; gap: 0.5rem">
+            <RadzenCheckBox @bind-Value="@showDataLabels" Name="dataLabels"></RadzenCheckBox>
+            <RadzenLabel Text="Wartości" For="dataLabels" />
+        </RadzenCard>
+        <RadzenChart>
+            <RadzenLineSeries Smooth="true" Data="@oneDayData" CategoryProperty="Date" Title="@categoryData.GetDisplayDescription()" LineType="LineType.Dashed" ValueProperty="@categoryData.ToString()">
+                <RadzenMarkers MarkerType="MarkerType.Circle" />
+                <RadzenSeriesDataLabels Visible="@showDataLabels" />
+            </RadzenLineSeries>
+            <RadzenCategoryAxis Padding="20" Formatter="@FormatAsHour">
+                <RadzenAxisTitle Text="Godzina" />
+            </RadzenCategoryAxis>
+            <RadzenValueAxis Formatter="@FormatAsString">
+                <RadzenGridLines Visible="true" />
+            </RadzenValueAxis>
+        </RadzenChart>
+    </div>
+}
 @code {
 
-    [Parameter] public IEnumerable<OneDayDataVm> oneDayData { get; set; }
+    public IEnumerable<OneDayDataVm> oneDayData { get; set; }
+    [Parameter] public DateTime dateParameter { get; set; }
     CategoryData categoryData;
     bool showDataLabels = false;
+
+    public async Task GetSpecifiedDayDetails()
+    {
+        oneDayData = await broker.GetOneDayData(dateParameter.ToString("dd-MM-yyyy"));
+
+        await OnAfterRenderAsync(false);
+    }
 
     private object OnSomethingChanged(object? sender)
     {

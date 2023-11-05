@@ -1,43 +1,68 @@
 ﻿@using Vetero.Shared.ViewModels.WeatherStations;
+@inject IApiBroker broker;
 
-<div class="row">
-    <div class="col-sm-12 my-5">
-        <RadzenCard Class="rz-background-color-success-lighter rz-shadow-10 rz-my-6 rz-mx-auto" Style="max-width: 420px">
-            <RadzenText TextStyle="TextStyle.H6" class="text-center rz-mt-2 rz-my-0">Uśrednione dane</RadzenText>
-            <RadzenRow RowGap="0">
-                <RadzenColumn SizeSM="6">
-                    <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0">Data</RadzenText>
-                    <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.Date.ToString()</b></RadzenText>
-                </RadzenColumn>
-                <RadzenColumn SizeSM="6">
-                    <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0">Temperatura</RadzenText>
-                    <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.Temperature ℃</b></RadzenText>
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenCard class="rz-background-color-success-lighter rz-shadow-5 rz-border-radius-0 rz-p-8" style="margin: 1rem calc(-1 * var(--rz-card-padding));">
-                <RadzenText TextStyle="TextStyle.H6" class="text-center rz-color-on-primary-light"><strong>Szczegóły</strong></RadzenText>
+@if (avgData == null)
+{
+    <div class="rz-p-12 rz-text-align-center">
+        <RadzenDatePicker class="rz-shadow-3" @bind-Value=@dateParameter DateFormat="dd-MM-yyyy" Change="@(() => GetSpecifiedDayDetails())" />
+    </div>   
+}
+else
+{
+    <div class="rz-p-12 rz-text-align-center">
+        <RadzenDatePicker class="rz-shadow-3" @bind-Value=@dateParameter DateFormat="dd-MM-yyyy" Change="@(() => GetSpecifiedDayDetails())" />
+    </div>
+    <div class="row">
+        <div class="col-sm-12 my-5">
+            <RadzenCard Class="rz-background-color-success-lighter rz-shadow-10 rz-my-6 rz-mx-auto" Style="max-width: 420px">
+                <RadzenText TextStyle="TextStyle.H6" class="text-center rz-mt-2 rz-my-0">Uśrednione dane</RadzenText>
                 <RadzenRow RowGap="0">
                     <RadzenColumn SizeSM="6">
-                        <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Prędkość wiatru</RadzenText>
-                        <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.WindKph km/h</b></RadzenText>
-                        <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Kierunek wiatru</RadzenText>
-                        <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.WindDir</b></RadzenText>
-                        <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Uv</RadzenText>
-                        <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.Uv</b></RadzenText>
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0">Data</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.Date.ToString()</b></RadzenText>
                     </RadzenColumn>
                     <RadzenColumn SizeSM="6">
-                        <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Deszcz</RadzenText>
-                        <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.TotalPrecip_in l/m²</b></RadzenText>
-                        <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Ciśnienie</RadzenText>
-                        <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.Pressure Pa</b></RadzenText>
-                        <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Wilgotność</RadzenText>
-                        <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.Humidity %</b></RadzenText>
+                        <RadzenText TextStyle="TextStyle.Overline" class="rz-display-flex rz-mt-4 rz-mb-0">Temperatura</RadzenText>
+                        <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.Temperature ℃</b></RadzenText>
                     </RadzenColumn>
                 </RadzenRow>
+                <RadzenCard class="rz-background-color-success-lighter rz-shadow-5 rz-border-radius-0 rz-p-8" style="margin: 1rem calc(-1 * var(--rz-card-padding));">
+                    <RadzenText TextStyle="TextStyle.H6" class="text-center rz-color-on-primary-light"><strong>Szczegóły</strong></RadzenText>
+                    <RadzenRow RowGap="0">
+                        <RadzenColumn SizeSM="6">
+                            <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Prędkość wiatru</RadzenText>
+                            <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.WindKph km/h</b></RadzenText>
+                            <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Kierunek wiatru</RadzenText>
+                            <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.WindDir</b></RadzenText>
+                            <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Uv</RadzenText>
+                            <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.Uv</b></RadzenText>
+                        </RadzenColumn>
+                        <RadzenColumn SizeSM="6">
+                            <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Deszcz</RadzenText>
+                            <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.TotalPrecip_in l/m²</b></RadzenText>
+                            <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Ciśnienie</RadzenText>
+                            <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.Pressure Pa</b></RadzenText>
+                            <RadzenText TextStyle="TextStyle.Overline" class="rz-color-on-primary-light rz-display-flex rz-mt-4 rz-mb-0">Wilgotność</RadzenText>
+                            <RadzenText TextStyle="TextStyle.Body1"><b>@avgData.Humidity %</b></RadzenText>
+                        </RadzenColumn>
+                    </RadzenRow>
+                </RadzenCard>
             </RadzenCard>
-        </RadzenCard>
+        </div>
     </div>
-</div>
+}
 @code{
-    [Parameter] public AvgDayDataVm avgData{ get; set; }
+    [Parameter] public DateTime dateParameter { get; set; }
+    public AvgDayDataVm? avgData{ get; set; }
+    public IEnumerable<OneDayDataVm>? oneDayData { get; set; }
+
+    public async Task GetSpecifiedDayDetails()
+    {
+        oneDayData = await broker.GetOneDayData(dateParameter.ToString("dd-MM-yyyy"));
+        if (oneDayData.Any())
+            avgData = new AvgDayDataVm(oneDayData);
+        else
+            avgData = null;
+        await OnAfterRenderAsync(false);
+    }
 }

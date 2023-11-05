@@ -14,9 +14,9 @@ namespace Vetero.Shared.ViewModels.Rapid.ForecastItems
         {
             return new WeatherTestDataDto()
             {
-                Date = date,
+                Date = DateTime.Parse(date),
                 Humidity = day.avghumidity,
-                Temperature = day.maxtemp_c,
+                Temperature = day.avgtemp_c,
                 TotalPrecip_mm = day.totalprecip_mm,
                 WindKph = day.maxwind_kph
             };

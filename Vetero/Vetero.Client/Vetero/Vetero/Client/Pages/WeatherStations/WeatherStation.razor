@@ -7,24 +7,34 @@
 
 <h1 class="text-center exotic">Dane stacji pogodowej</h1>
 
-@if(currentData == null)
-{
-    <p>Loading...</p>
-}
-else
-{
-    <WeatherStationCurrent weatherImagePath="@weatherImagePath" currentData="currentData" />
-}
-@code{
-    private CurrentDataVm currentData;
+<div class="container">
+    <RadzenTabs TabPosition="TabPosition.Top" RenderMode="TabRenderMode.Client">
+        <Tabs>
+            <RadzenTabsItem Text="Aktualna" a>
+                <WeatherStationCurrent weatherImagePath="@weatherImagePath" currentData="@currentData"/>
+            </RadzenTabsItem>
+            <RadzenTabsItem Text="Średnia">
+                <WeatherStationAvgCurrent dateParameter="@dateParameter" />
+            </RadzenTabsItem>
+            <RadzenTabsItem Text="Godzinowa">
+                <WeatherStationDailyGrid dateParameter="@dateParameter" />
+            </RadzenTabsItem>
+            <RadzenTabsItem Text="Wykres">
+                <WeatherStationChart dateParameter="@dateParameter" />
+            </RadzenTabsItem>
+        </Tabs>
+    </RadzenTabs>
+</div>
+
+
+@code {
+    private DateTime dateParameter = DateTime.Now;
+    private CurrentDataVm? currentData;
     private string weatherImagePath = string.Empty;
 
-   
     protected override async Task OnInitializedAsync()
     {
-        await base.OnInitializedAsync();
         currentData = await apiBroker.GetCurrentDataAsync();
         weatherImagePath = $"dist/img/weather/{currentData.WeatherImage}";
     }
-
 }

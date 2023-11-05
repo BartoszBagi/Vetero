@@ -2,7 +2,7 @@
 {
     public class WeatherTestDataDto
     {
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
         public double Temperature { get; set; }
         public double Humidity { get; set; }
         public double WindKph { get; set; }

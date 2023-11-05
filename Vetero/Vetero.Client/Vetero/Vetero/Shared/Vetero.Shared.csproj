@@ -7,14 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.15" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Vetero.Domain\Vetero.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Helpers\" />
   </ItemGroup>
 </Project>

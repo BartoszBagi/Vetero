@@ -3,28 +3,23 @@
 @inject IJSRuntime JsRuntime
 @inject IApiBroker broker
 
-<div class="row rz-shadow-10">
-    <RadzenPanel AllowCollapse="false" Class="rz-my-10 rz-mx-auto" Style="width: 400px;">
-        <ChildContent>
-            <RadzenDataList PageSize="1" AllowPaging="true"
-                            Data="@forecastDays" TItem="Forecastday">
-                <Template Context="forecastDay" >
-                    <WeatherCard DateTime="@forecastDay.date"
-                                 WeatherDescription="@forecastDay.day.condition.text"
-                                 Temperature="@forecastDay.day.avgtemp_c"
-                                 TemperatureFeelsLike="@forecastDay.hour.Where(x => x.temp_c == @forecastDay.hour.Max(x => x.temp_c)).FirstOrDefault().feelslike_c"
-                                 TemperatureMax="@forecastDay.day.maxtemp_c"
-                                 TemperatureMin="@forecastDay.day.mintemp_c"
-                                 Humidity="@forecastDay.day.avghumidity"
-                                 WindSpeed="@forecastDay.day.avgvis_km" 
-                                 WeatherIcon="@forecastDay.day.condition.icon"/>
-                                 <td><button class="btn btn-primary" @onclick="() => SaveWeatherTestData(forecastDay)">Zapisz do porównania</button></td>
-                </Template>
-            </RadzenDataList>
-        </ChildContent>
-    </RadzenPanel>
+<div class="row">
+@foreach (Forecastday forecastDay in @forecastDays)
+{
+        <div class="col-4 text-center" style="max-width: 300px">
+        <WeatherCard DateTime="@forecastDay.date"
+                        WeatherDescription="@forecastDay.day.condition.text"
+                        Temperature="@forecastDay.day.avgtemp_c"
+                        TemperatureFeelsLike="@forecastDay.hour.Where(x => x.temp_c == @forecastDay.hour.Max(x => x.temp_c)).FirstOrDefault().feelslike_c"
+                        TemperatureMax="@forecastDay.day.maxtemp_c"
+                        TemperatureMin="@forecastDay.day.mintemp_c"
+                        Humidity="@forecastDay.day.avghumidity"
+                        WindSpeed="@forecastDay.day.avgvis_km" 
+                        WeatherIcon="@forecastDay.day.condition.icon"/>
+                        <button class="btn btn-primary" @onclick="() => SaveWeatherTestData(forecastDay)">Zapisz do porównania</button>
+    </div>
+}  
 </div>
-
 @code {
     [Parameter] public IEnumerable<Forecastday> forecastDays { get; set; }
 
@@ -33,7 +28,7 @@
         bool confirmed = await JsRuntime.InvokeAsync<bool>("confirm", "Jesteś pewien?");
         if (confirmed)
         {
-            await broker.SaveWeatherTestData(day.ToTestData());
+            await broker.SaveWeatherTestDataAsync(day.ToTestData());
         }
     }
 }

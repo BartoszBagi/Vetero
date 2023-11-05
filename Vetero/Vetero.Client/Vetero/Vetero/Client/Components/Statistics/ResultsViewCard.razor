@@ -1,0 +1,28 @@
+﻿@using Vetero.Shared.Commands.Rapid;
+
+<div class="rz-background-color-success-lighter card text-center">
+    <div class="card-body">
+        <div class="display-6">
+            <p>Wynik</p>
+        </div>
+        <p class="display-7">
+            Temperatura @Temperature %
+        </p>
+        <p class="display-7">
+            Wilgotność @Humidity %
+        </p>
+        <p class="display-7">
+            Wiatr @WindSpeed %
+        </p>
+        <p class="display-7">
+            Deszcz @TotalPrecip_mm %
+        </p>
+    </div>
+</div>
+
+@code {
+    [Parameter] public double Temperature { get; set; }
+    [Parameter] public double Humidity { get; set; }
+    [Parameter] public double WindSpeed { get; set; }
+    [Parameter] public double TotalPrecip_mm { get; set; }
+}

@@ -5,22 +5,11 @@
     {
         <div class="card-header">
             @DateTime
-            <br/>
-            <RadzenImage Path="@WeatherIcon" />
         </div>
     }
     <div class="card-body">
-        <p class="mb-0">
-            @WeatherDescription
-        </p>
         <p class="display-6">
             @Temperature °c
-        </p>
-        <p class="small">
-            Temp. odczuwalna @TemperatureFeelsLike °c
-        </p>
-        <p class="small">
-            Max @TemperatureMax °c Min @TemperatureMin °c
         </p>
         <p class="small">
             Wilgotność @Humidity %
@@ -29,20 +18,15 @@
             Wiatr @WindSpeed m/s
         </p>
         <p class="small">
-            Deszcz @TotalPrecip_mm mm/h
+            Deszcz @TotalPrecip_mm mm
         </p>
     </div>
 </div>
 
 @code {
     [Parameter] public string? DateTime { get; set; }
-    [Parameter] public string WeatherDescription { get; set; }
     [Parameter] public double Temperature { get; set; }
-    [Parameter] public double TemperatureFeelsLike { get; set; }
-    [Parameter] public double TemperatureMax { get; set; }
-    [Parameter] public double TemperatureMin { get; set; }
     [Parameter] public double Humidity { get; set; }
     [Parameter] public double WindSpeed { get; set; }
     [Parameter] public double TotalPrecip_mm { get; set; }
-    [Parameter] public string WeatherIcon { get; set; }
 }
