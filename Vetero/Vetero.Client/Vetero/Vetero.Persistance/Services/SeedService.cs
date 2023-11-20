@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Vetero.Domain.Entities.Api;
 using Vetero.Domain.Entities.WeatherData;
 using Vetero.Persistance.Helpers;
 
@@ -7,9 +8,26 @@ namespace Vetero.Persistance.Services
     public static class SeedService
     {
         public static void SeedData(this ModelBuilder modelBuilder)
-        {
+        {       
+            modelBuilder.Entity<Role>().HasData(
+            new Role()
+            {
+                Id = 1,
+                Name = "User"
+            },
+             new Role()
+             {
+                 Id = 2,
+                 Name = "Manager"
+             },
+              new Role()
+              {
+                  Id = 3,
+                  Name = "Admin"
+              }
+            );
 
-            modelBuilder.Entity<WeatherStationData>().HasData(
+           modelBuilder.Entity<WeatherStationData>().HasData(
                 new WeatherStationData()
                 {
                     Id = 1,
@@ -392,7 +410,6 @@ namespace Vetero.Persistance.Services
                     Uv = 6
                 }
                 );
-
         }
     }
 }

@@ -1,0 +1,108 @@
+﻿@layout EmptyLayout
+@page "/users/register"
+
+@using Vetero.Shared.Dto.Account;
+@inject IApiBroker broker
+@inject NavigationManager navManager
+
+<h3>Rejestracja</h3>
+
+@if (string.IsNullOrEmpty(message) == false)
+{
+    <div class="alert alert-danger">
+        <p>@message</p>
+    </div>
+}
+<div class="container-sm">
+    <h3>Formularz Rejestracji</h3>
+
+    @if (registrationSuccess)
+    {
+        <p style="color: green;">Rejestracja udana!</p>
+    }
+    else
+    {
+        <EditForm Model="@RegistrationModel" OnValidSubmit="HandleRegistration" class="form">
+            <DataAnnotationsValidator />
+
+            <div class="form-group row">
+                <label for="email" class="col-sm-2 col-form-label">E-mail:</label>
+                <div class="col-sm-10">
+                    <InputText id="email" @bind-Value="RegistrationModel.Email" class="form-control" />
+                    <ValidationMessage For="@(() => RegistrationModel.Email)" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="password" class="col-sm-2 col-form-label">Hasło:</label>
+                <div class="col-sm-10">
+                    <InputText type="password" placeholder="Hasło" id="password" @bind-Value="RegistrationModel.Password" class="form-control" />
+                    <ValidationMessage For="@(() => RegistrationModel.Password)" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="confirmPassword" class="col-sm-2 col-form-label">Powtórz hasło:</label>
+                <div class="col-sm-10">
+                    <InputText type="password" placeholder="Hasło" id="confirmPassword" @bind-Value="RegistrationModel.ConfirmPassword" class="form-control" />
+                    <ValidationMessage For="@(() => RegistrationModel.ConfirmPassword)" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="firstName" class="col-sm-2 col-form-label">Imię:</label>
+                <div class="col-sm-10">
+                    <InputText id="firstName" @bind-Value="RegistrationModel.FirstName" class="form-control" />
+                    <ValidationMessage For="@(() => RegistrationModel.FirstName)" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="lastName" class="col-sm-2 col-form-label">Nazwisko:</label>
+                <div class="col-sm-10">
+                    <InputText id="lastName" @bind-Value="RegistrationModel.LastName" class="form-control" />
+                    <ValidationMessage For="@(() => RegistrationModel.LastName)" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="city" class="col-sm-2 col-form-label">Miasto:</label>
+                <div class="col-sm-10">
+                    <InputText id="city" @bind-Value="RegistrationModel.City" class="form-control" />
+                    <ValidationMessage For="@(() => RegistrationModel.City)" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" class="btn btn-primary btn-sm">Zarejestruj się</button>
+                </div>
+            </div>
+        </EditForm>
+    }
+</div>
+@code {
+    RegisterUserDto RegistrationModel = new RegisterUserDto();
+    private bool registrationSuccess = false;
+    string message = string.Empty;
+
+    private async Task HandleRegistration()
+    {
+        try
+        {
+            await broker.RegisterAsync(RegistrationModel);
+            registrationSuccess = true;
+            NavigateToLogin();
+        }
+        catch (Exception ex)
+        {
+            message = ex.Message;
+        }
+    }
+
+
+    private void NavigateToLogin()
+    {
+        navManager.NavigateTo("/users/login");
+    }
+}
