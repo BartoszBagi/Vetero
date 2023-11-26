@@ -1,7 +1,9 @@
 ﻿@page "/weather-forecast"
+@using System.Security.Claims;
 @using Vetero.Client.Components.Forecast
 @using Vetero.Shared.ViewModels.Rapid.ForecastItems;
 @inject IApiBroker broker
+@inject IAuthenticationService authenticationService
 
 @if (forecast == null)
 {
@@ -15,11 +17,17 @@ else
     private ForecastWeather forecast;
     private IEnumerable<Forecastday> forecastDay;
     private Forecastday avgCurrent;
+
+
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        forecast = await broker.GetForecastWeatherAsync("Siedlce", days: 14);
+        var claims = await authenticationService.GetAuthenticatedUserClaims();
+        var cityName = claims != null ? claims.FirstOrDefault(x => x.Type == "City").Value : "Siedlce";
+        forecast = await broker.GetForecastWeatherAsync(cityName, days: 14);
         forecastDay = forecast.forecast.forecastday;
         avgCurrent = forecastDay.FirstOrDefault();
     }
+
+
 }

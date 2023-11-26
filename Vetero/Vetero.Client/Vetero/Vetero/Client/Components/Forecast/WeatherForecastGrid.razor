@@ -1,7 +1,7 @@
 ﻿@using Vetero.Shared.ViewModels.Rapid.ForecastItems;
 
 <div class="rz-p-12 rz-text-align-center">
-    <RadzenDatePicker class="rz-shadow-3" @bind-Value=@dateParameter Change="@(() => GetSpecifiedDayDetails())" />
+    <RadzenDatePicker class="rz-shadow-3" @bind-Value=@dateParameter DateFormat="dd-MM-yyyy" Change="@(() => GetSpecifiedDayDetails())" />
 </div>
 
 <div class="row rz-shadow-10">

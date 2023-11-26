@@ -1,5 +1,6 @@
 ﻿using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
+using System.Security.Claims;
 using Vetero.Client.Providers;
 using Vetero.Shared.Dto.Account;
 
@@ -32,6 +33,19 @@ namespace Vetero.Client.Services.Authentication
         {
             await ((ApiAuthenticationStateProvider)authenticationStateProvider).LoggedOut();
 
+        }
+
+        public async Task<AuthenticationState> GetAuthenticationStateAsync()
+        {
+            return await ((ApiAuthenticationStateProvider)authenticationStateProvider).GetAuthenticationStateAsync();
+        }
+        public async Task<IEnumerable<Claim>> GetAuthenticatedUserClaims()
+        {
+            var authenticationState = await GetAuthenticationStateAsync();
+            var identity = authenticationState.User.Identities.FirstOrDefault();
+            var claims = identity.Claims;
+
+            return claims;
         }
 
     }

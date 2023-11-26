@@ -6,5 +6,6 @@ namespace Vetero.Client.Brokers.API
     {
         Task<LoginResponseDto> LoginAsync(LoginUserDto userDto);
         Task RegisterAsync(RegisterUserDto user);
+        Task<bool> UpdateCityAsync(UpdateCityDto cityDto);
     }
 }

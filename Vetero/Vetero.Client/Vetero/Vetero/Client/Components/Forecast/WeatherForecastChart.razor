@@ -3,7 +3,7 @@
 @using Vetero.Shared.ViewModels.WeatherStations;
 
 <div class="rz-p-12 rz-text-align-center">
-    <RadzenDatePicker class="rz-shadow-3" @bind-Value=@dateParameter Change="@(() => GetSpecifiedDayDetails())" />
+    <RadzenDatePicker class="rz-shadow-3" @bind-Value=@dateParameter DateFormat="dd-MM-yyyy" Change="@(() => GetSpecifiedDayDetails())" />
 </div>
 
 <RadzenDropDown class="rz-shadow-3" Data="@(Enum.GetValues(typeof(CategoryData)).Cast<Enum>())" @bind-Value=@categoryData onchange="@OnSomethingChanged(null)"

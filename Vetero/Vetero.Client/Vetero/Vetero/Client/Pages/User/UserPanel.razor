@@ -1,8 +1,48 @@
 ﻿@page "/user-panel"
+@using Vetero.Shared.Dto.Account;
 
+@inject IAuthenticationService authenticationService
+@inject IApiBroker broker
 
-<h1 class="text-center exotic">Panel użytkownika</h1>
+<div class="container mt-3">
+    <h3>Panel Użytkownika</h3>
+
+    <EditForm Model="@user" OnValidSubmit="HandleValidSubmit">
+        <div class="form-group">
+            <label for="firstName">Imię:</label>
+            <InputText id="firstName" @bind-Value="user.FirstName" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Nazwisko:</label>
+            <InputText id="lastName" @bind-Value="user.LastName" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <label for="city">Miasto:</label>
+            <InputText id="city" @bind-Value="user.City" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+    </EditForm>
+</div>
 
 @code {
+    private UserDto user { get; set; } = new UserDto();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var claims = await authenticationService.GetAuthenticatedUserClaims();
+        user.FirstName = claims.FirstOrDefault(x => x.Type == "FirstName").Value;
+        user.LastName = claims.FirstOrDefault(x => x.Type == "LastName").Value;
+        user.City = claims.FirstOrDefault(x => x.Type == "City").Value;
+        user.Id = int.Parse(claims.FirstOrDefault(x => x.Type == "Id").Value);
+    }
+
+
+    private async Task HandleValidSubmit()
+    {
+        await broker.UpdateCityAsync(new UpdateCityDto { UserId = user.Id, City = user.City });
+    }
 
 }

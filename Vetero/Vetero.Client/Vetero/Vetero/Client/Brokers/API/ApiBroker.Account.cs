@@ -15,6 +15,15 @@ namespace Vetero.Client.Brokers.API
             return auth;
         }
 
+        public async Task<bool> UpdateCityAsync(UpdateCityDto cityDto)
+        {
+            var response = await this.PutAsync<UpdateCityDto>(AuthRelativeUrl + "/city", cityDto);
+            var str = await response.Content.ReadAsStringAsync();
+
+            var result = JsonSerializer.Deserialize<bool>(str, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            return result;
+        }
+
         public async Task RegisterAsync(RegisterUserDto user) =>
             await this.PostAsync(AuthRelativeUrl + "/register", user);
     }

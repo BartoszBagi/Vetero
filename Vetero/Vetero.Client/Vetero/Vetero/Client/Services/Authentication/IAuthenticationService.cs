@@ -1,4 +1,6 @@
-﻿using Vetero.Shared.Dto.Account;
+﻿using Microsoft.AspNetCore.Components.Authorization;
+using System.Security.Claims;
+using Vetero.Shared.Dto.Account;
 
 namespace Vetero.Client.Services.Authentication
 {
@@ -6,5 +8,7 @@ namespace Vetero.Client.Services.Authentication
     {
         Task<bool> AuthenticateAsync(LoginUserDto loginModel);
         public Task Logout();
+        Task<AuthenticationState> GetAuthenticationStateAsync();
+        Task<IEnumerable<Claim>> GetAuthenticatedUserClaims();
     }
 }
