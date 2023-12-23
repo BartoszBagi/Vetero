@@ -4,8 +4,8 @@
 @inject IAuthenticationService authenticationService
 @inject IApiBroker broker
 
-<div class="container mt-3">
-    <h3>Panel Użytkownika</h3>
+<div class="container mt-3" style="max-width: 500px;">
+    <h3 class="text-center exotic">Panel Użytkownika</h3>
 
     <EditForm Model="@user" OnValidSubmit="HandleValidSubmit">
         <div class="form-group">

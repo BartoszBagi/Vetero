@@ -5,16 +5,14 @@
 @inject IApiBroker broker
 @inject NavigationManager navManager
 
-<h3>Rejestracja</h3>
-
 @if (string.IsNullOrEmpty(message) == false)
 {
     <div class="alert alert-danger">
         <p>@message</p>
     </div>
 }
-<div class="container-sm">
-    <h3>Formularz Rejestracji</h3>
+<div class="container" style="max-width: 500px;">
+    <h3 class="text-center">Formularz Rejestracji</h3>
 
     @if (registrationSuccess)
     {

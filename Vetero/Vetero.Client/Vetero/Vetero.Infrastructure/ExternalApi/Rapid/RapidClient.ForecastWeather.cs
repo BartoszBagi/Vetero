@@ -27,11 +27,14 @@ namespace Vetero.Infrastructure.ExternalApi.Rapid
                     var url = urlBuilder.ToString();
                     request.RequestUri = new Uri(url, UriKind.RelativeOrAbsolute);
 
-                    var response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response = await client
+                        .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
+                        .ConfigureAwait(false);
 
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        var responseData = response.Content == null ? null : await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var responseData = response.Content == null ? null : 
+                            await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                         return responseData;
                     }
                     else

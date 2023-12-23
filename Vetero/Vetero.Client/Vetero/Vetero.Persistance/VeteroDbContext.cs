@@ -39,7 +39,8 @@ namespace Vetero.Persistance
             modelBuilder.SeedData();
         }
 
-        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+        public override Task<int> SaveChangesAsync(
+            bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
         {
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
